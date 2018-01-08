@@ -10,9 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-    //comment
-    //s
-    //yaboi2
+    //it
+    //me
+    //I'm
+    //dat
+    //boi
 
 
     @Override
