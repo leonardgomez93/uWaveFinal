@@ -10,15 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-    //it
-    //me
-    //I'm
-    //dat
-    //boi
-    //yo is this going to work yet!
-    //uooo
-    //I hope this works
-    //please work...please lol
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
