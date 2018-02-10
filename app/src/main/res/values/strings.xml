@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">uwaveAndroid</string>
     <string name="action_settings">Settings</string>
+    <string name="about">UWave Radio is the campus-based community station of the Bothell area and beyond. We are a center for community engagement, a hub for underrepresented voices and music,
+        an environment for professional development, and a catalyst for social justice. In 2012, a group of University of Washington Bothell students who shared a common interest in community media
+        began building a radio station from scratch. We started broadcasting online in the spring of 2013 with a mixture of talk, music, and educational programming. Over the last year, we applied and were
+        approved for a Low Power FM license from the FCC. You can view our future broadcast range here. Within the next year, we hope our listeners will be tuning in from their homes, work, cars, and online.
+        We are growing every day! To learn more, visit our get involved page.
+    </string>
 </resources>
