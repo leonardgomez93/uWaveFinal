@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homepage"
+        android:title="Home"
+        android:icon="@drawable/ic_home_black_24dp">
+
+
+    </item>
+    <item
+      android:id="@+id/about_us"
+        android:title="About Us"
+        android:icon="@drawable/about_us_temp_icon">
+
+
+    </item>
+    <item
+        android:id="@+id/livestream"
+        android:title="Livestream"
+        android:icon="@drawable/livestreaming_24dp">
+
+
+    </item>
+
+    <item
+    android:id="@+id/mywave"
+    android:title="MyWave"
+    android:icon="@drawable/my_wave_temp_24dp">
+
+
+</item>
+    <item
+        android:id="@+id/schedule"
+        android:title="Schedule"
+        android:icon="@drawable/ic_menu_black_24dp">
+
+
+    </item>
+</menu>
