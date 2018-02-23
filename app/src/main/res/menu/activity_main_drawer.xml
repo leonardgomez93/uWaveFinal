@@ -17,9 +17,9 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Schedule" />
         <item
-            android:id="@+id/nav_host"
+            android:id="@+id/nav_mywave"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Host Your Own Show" />
+            android:title="MyWave" />
         <item
             android:id="@+id/nav_community"
             android:icon="@drawable/ic_menu_manage"

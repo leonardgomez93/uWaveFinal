@@ -6,4 +6,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_about_us">AboutUs</string>
+    <string name="title_activity_schedule">Schedule</string>
+    <string name="title_activity_my_wave">MyWave</string>
+    <string name="title_activity_community">Community</string>
 </resources>

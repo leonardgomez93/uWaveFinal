@@ -28,6 +28,33 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
         </activity>
+        <activity
+            android:name=".Schedule"
+            android:label="@string/title_activity_schedule"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MyWave"
+            android:label="@string/title_activity_my_wave"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Community"
+            android:label="@string/title_activity_community"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
