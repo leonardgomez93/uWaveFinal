@@ -8,4 +8,20 @@
     tools:context="com.example.leonardgomez.uwavefinal.Schedule"
     tools:showIn="@layout/activity_schedule">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="91dp"
+        android:layout_marginTop="8dp"
+        android:padding="20dp"
+        android:text="@string/schedule_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="5dp">
+
+    </TextView>
+
+
 </android.support.constraint.ConstraintLayout>
