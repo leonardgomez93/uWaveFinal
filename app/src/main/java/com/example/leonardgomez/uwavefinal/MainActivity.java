@@ -15,9 +15,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 
+import com.example.leonardgomez.uwavefinal.OggStreamPlayer;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    private OggStreamPlayer player;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        player = new OggStreamPlayer();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -36,7 +40,15 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    public void playAsync(View view)
+    {
+        player.playAsync("http://78.28.48.14:8000/stream.ogg");
+    }
 
+    public void stop(View view)
+    {
+        player.stop();
+    }
 
     @Override
     public void onBackPressed() {
