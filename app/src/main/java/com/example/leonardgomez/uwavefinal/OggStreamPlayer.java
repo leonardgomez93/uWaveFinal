@@ -24,14 +24,6 @@ import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.util.Log;
-import com.example.leonardgomez.uwavefinal.Packet;
-import com.example.leonardgomez.uwavefinal.Page;
-import com.example.leonardgomez.uwavefinal.StreamState;
-import com.example.leonardgomez.uwavefinal.SyncState;
-import com.example.leonardgomez.uwavefinal.Block;
-import com.example.leonardgomez.uwavefinal.Comment;
-import com.example.leonardgomez.uwavefinal.DspState;
-import com.example.leonardgomez.uwavefinal.Info;
 
 
 import java.io.IOException;

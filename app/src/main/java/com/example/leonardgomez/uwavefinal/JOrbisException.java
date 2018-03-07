@@ -1,3 +1,4 @@
+
 /* -*-mode:java; c-basic-offset:2; indent-tabs-mode:nil -*- */
 /* JOrbis
  * Copyright (C) 2000 ymnk, JCraft,Inc.
@@ -26,15 +27,15 @@
 
 package com.example.leonardgomez.uwavefinal;
 
-public class JOrbisException extends Exception{
+public class JOrbisException extends Exception {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
-    public JOrbisException(){
+    public JOrbisException() {
         super();
     }
 
-    public JOrbisException(String s){
-        super("JOrbis: "+s);
+    public JOrbisException(String s) {
+        super("JOrbis: " + s);
     }
 }

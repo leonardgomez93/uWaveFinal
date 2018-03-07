@@ -1,5 +1,6 @@
 package com.example.leonardgomez.uwavefinal;
 
+import android.media.MediaPlayer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 
-import com.example.leonardgomez.uwavefinal.OggStreamPlayer;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
 
     public void playAsync(View view)
     {
-        player.playAsync("http://78.28.48.14:8000/stream.ogg");
+        player.playAsync("https://live.uwave.fm:8443/listen-128.ogg");
     }
 
     public void stop(View view)
