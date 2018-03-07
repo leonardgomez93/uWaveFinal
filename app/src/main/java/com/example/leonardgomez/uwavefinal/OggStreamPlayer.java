@@ -210,7 +210,7 @@ public class OggStreamPlayer
         }
         catch (IOException exception)
         {
-            Log.e(TAG, "An I/O error occoured while trying create the "
+            Log.e(TAG, "An I/O error occurred while trying create the "
                     + "URL connection.");
         }
 
@@ -241,7 +241,7 @@ public class OggStreamPlayer
         // Check that we got an InputStream.
         if (inputStream == null)
         {
-            Log.e(TAG, "We don't have an input stream and therefor cannot continue.");
+            Log.e(TAG, "We don't have an input stream and therefore cannot continue.");
             return;
         }
 
