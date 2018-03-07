@@ -1,3 +1,6 @@
+// Need to bypass defaulting MainActivity to all pages, and move livestream button up
+// to task bar, solely in main.xml
+
 package com.example.leonardgomez.uwavefinal;
 
 import android.media.MediaPlayer;
