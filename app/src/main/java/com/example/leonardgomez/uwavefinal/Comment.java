@@ -10,7 +10,7 @@ public class Comment {
 
     private static final int OV_EIMPL=-130;
 
-    // unlimited user comment fields.
+    // unlimited user comment field2.
     public byte[][] user_comments;
     public int[] comment_lengths;
     public int comments;
