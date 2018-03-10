@@ -20,5 +20,5 @@ Business is in charge of the little details: underwriting content, legal inquiri
 </string>
     <string name="schedule_text">"Schedule Coming Soon!"</string>
     <string name="stream_button">"Live Stream Button"</string>
-
+<string name="API_KEY">AIzaSyBY_4H7JlaFciTsgnVDbRHEp_KGoVMbHLY</string>
 </resources>
