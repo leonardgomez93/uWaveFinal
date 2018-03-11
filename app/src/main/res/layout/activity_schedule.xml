@@ -8,11 +8,20 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <include layout="@layout/content_schedule" />
+
+
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <include layout="@layout/content_schedule" />
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    </WebView>
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -20,11 +29,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer">
 
-    <WebView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/webview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+    </android.support.design.widget.NavigationView>
+
 
 </android.support.v4.widget.DrawerLayout>
+
