@@ -12,6 +12,10 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebSettings;
+import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.Events;
+
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -119,9 +123,13 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
         setContentView(activityLayout);
 
         // Initialize credentials and service object.
+
         mCredential = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
+
+
+
     }
 
 
@@ -134,7 +142,6 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
      * appropriate.
      */
     private void getResultsFromApi() {
-
         if (! isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
         } else if (mCredential.getSelectedAccountName() == null) {
@@ -144,6 +151,7 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
         } else {
             new MakeRequestTask(mCredential).execute();
         }
+
     }
 
     /**
@@ -348,6 +356,7 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
          */
         @Override
         protected List<String> doInBackground(Void... params) {
+
             try {
                 return getDataFromApi();
             } catch (Exception e) {
@@ -360,14 +369,14 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
         /**
          * Fetch a list of the next 10 events from the primary calendar.
          * @return List of Strings describing returned events.
-         * @throws IOException
          */
         private List<String> getDataFromApi() throws IOException {
+        //private List<String> getDataFromApi() {
             // List the next 10 events from the primary calendar.
             DateTime now = new DateTime(System.currentTimeMillis());
             List<String> eventStrings = new ArrayList<String>();
-            Events events = mService.events().list("primary")
-                    .setMaxResults(10)
+            Events events = mService.events().list("vfgkklo6vnqh4j7iu4b9ffqgvs@group.calendar.google.com")
+                    .setMaxResults(20)
                     .setTimeMin(now)
                     .setOrderBy("startTime")
                     .setSingleEvents(true)
