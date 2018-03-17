@@ -79,7 +79,7 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
 
     private static final String BUTTON_TEXT = "Call Google Calendar API";
     private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = { CalendarScopes.CALENDAR};
+    private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
