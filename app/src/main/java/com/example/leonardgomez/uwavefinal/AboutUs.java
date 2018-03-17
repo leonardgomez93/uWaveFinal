@@ -35,8 +35,6 @@ public class AboutUs extends MainActivity {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
-
-
-
 }
