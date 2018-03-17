@@ -134,6 +134,7 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
      * appropriate.
      */
     private void getResultsFromApi() {
+
         if (! isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
         } else if (mCredential.getSelectedAccountName() == null) {
