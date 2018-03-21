@@ -108,7 +108,7 @@ public class Schedule extends MainActivity implements EasyPermissions.Permission
         // Initialize credentials and service object.
         mCredential = GoogleAccountCredential.usingOAuth2(getApplicationContext(), Arrays.asList(SCOPES)).setBackOff(new ExponentialBackOff());
 
-        setContentView(activityLayout);
+        //setContentView(activityLayout);
         Intent uwaveCalendar = new Intent();
         uwaveCalendar.setType("vnd.android.cursor.item/event");
         uwaveCalendar.setAction(Intent.ACTION_VIEW);
