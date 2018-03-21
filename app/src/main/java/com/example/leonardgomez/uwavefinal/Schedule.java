@@ -1,22 +1,5 @@
 package com.example.leonardgomez.uwavefinal;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.webkit.WebSettings;
-import com.google.api.services.calendar.Calendar;
-import com.google.api.services.calendar.model.Event;
-import com.google.api.services.calendar.model.Events;
-
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -63,10 +46,7 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-
-//1
-public class Schedule extends MainActivity implements NavigationView.OnNavigationItemSelectedListener, EasyPermissions.PermissionCallbacks {
-
+public class Schedule extends MainActivity implements EasyPermissions.PermissionCallbacks {
     GoogleAccountCredential mCredential;
     private TextView mOutputText;
     private Button mCallApiButton;
@@ -79,25 +59,29 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
 
     private static final String BUTTON_TEXT = "Call Google Calendar API";
     private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY };
+    private static final String[] SCOPES = {CalendarScopes.CALENDAR_READONLY};
+
+    /**
+     * Create the main activity.
+     *
+     * @param savedInstanceState previously saved instance data.
+     */
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         LinearLayout activityLayout = new LinearLayout(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         activityLayout.setLayoutParams(lp);
         activityLayout.setOrientation(LinearLayout.VERTICAL);
         activityLayout.setPadding(16, 16, 16, 16);
 
-        ViewGroup.LayoutParams tlp = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams tlp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         mCallApiButton = new Button(this);
         mCallApiButton.setText(BUTTON_TEXT);
         mCallApiButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 mCallApiButton.setEnabled(false);
@@ -106,32 +90,30 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
                 mCallApiButton.setEnabled(true);
             }
         });
-        activityLayout.addView(mCallApiButton);
 
+        activityLayout.addView(mCallApiButton);
         mOutputText = new TextView(this);
         mOutputText.setLayoutParams(tlp);
         mOutputText.setPadding(16, 16, 16, 16);
         mOutputText.setVerticalScrollBarEnabled(true);
         mOutputText.setMovementMethod(new ScrollingMovementMethod());
         mOutputText.setText(
-                "Click the \'" + BUTTON_TEXT +"\' button to test the API.");
+                "Click the \'" + BUTTON_TEXT + "\' button to test the API.");
         activityLayout.addView(mOutputText);
 
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("Calling Google Calendar API ...");
 
-        setContentView(activityLayout);
 
         // Initialize credentials and service object.
+        mCredential = GoogleAccountCredential.usingOAuth2(getApplicationContext(), Arrays.asList(SCOPES)).setBackOff(new ExponentialBackOff());
 
-        mCredential = GoogleAccountCredential.usingOAuth2(
-                getApplicationContext(), Arrays.asList(SCOPES))
-                .setBackOff(new ExponentialBackOff());
-
-
-
+        setContentView(activityLayout);
+        Intent uwaveCalendar = new Intent();
+        uwaveCalendar.setType("vnd.android.cursor.item/event");
+        uwaveCalendar.setAction(Intent.ACTION_VIEW);
+        startActivity(uwaveCalendar);
     }
-
 
 
     /**
@@ -142,16 +124,15 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
      * appropriate.
      */
     private void getResultsFromApi() {
-        if (! isGooglePlayServicesAvailable()) {
+        if (!isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
         } else if (mCredential.getSelectedAccountName() == null) {
             chooseAccount();
-        } else if (! isDeviceOnline()) {
+        } else if (!isDeviceOnline()) {
             mOutputText.setText("No network connection available.");
         } else {
             new MakeRequestTask(mCredential).execute();
         }
-
     }
 
     /**
@@ -193,17 +174,17 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
      * Called when an activity launched here (specifically, AccountPicker
      * and authorization) exits, giving you the requestCode you started it with,
      * the resultCode it returned, and any additional data from it.
+     *
      * @param requestCode code indicating which activity result is incoming.
-     * @param resultCode code indicating the result of the incoming
-     *     activity result.
-     * @param data Intent (containing result data) returned by incoming
-     *     activity result.
+     * @param resultCode  code indicating the result of the incoming
+     *                    activity result.
+     * @param data        Intent (containing result data) returned by incoming
+     *                    activity result.
      */
     @Override
-    protected void onActivityResult(
-            int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
+        switch (requestCode) {
             case REQUEST_GOOGLE_PLAY_SERVICES:
                 if (resultCode != RESULT_OK) {
                     mOutputText.setText(
@@ -219,8 +200,7 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
                     String accountName =
                             data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
                     if (accountName != null) {
-                        SharedPreferences settings =
-                                getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putString(PREF_ACCOUNT_NAME, accountName);
                         editor.apply();
@@ -234,16 +214,17 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
                     getResultsFromApi();
                 }
                 break;
-        }
+            }
     }
 
     /**
      * Respond to requests for permissions at runtime for API 23 and above.
-     * @param requestCode The request code passed in
-     *     requestPermissions(android.app.Activity, String, int, String[])
-     * @param permissions The requested permissions. Never null.
+     *
+     * @param requestCode  The request code passed in
+     *                     requestPermissions(android.app.Activity, String, int, String[])
+     * @param permissions  The requested permissions. Never null.
      * @param grantResults The grant results for the corresponding permissions
-     *     which is either PERMISSION_GRANTED or PERMISSION_DENIED. Never null.
+     *                     which is either PERMISSION_GRANTED or PERMISSION_DENIED. Never null.
      */
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -257,9 +238,10 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
     /**
      * Callback for when a permission is granted using the EasyPermissions
      * library.
+     *
      * @param requestCode The request code associated with the requested
-     *         permission
-     * @param list The requested permission list. Never null.
+     *                    permission
+     * @param list        The requested permission list. Never null.
      */
     @Override
     public void onPermissionsGranted(int requestCode, List<String> list) {
@@ -269,9 +251,10 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
     /**
      * Callback for when a permission is denied using the EasyPermissions
      * library.
+     *
      * @param requestCode The request code associated with the requested
-     *         permission
-     * @param list The requested permission list. Never null.
+     *                    permission
+     * @param list        The requested permission list. Never null.
      */
     @Override
     public void onPermissionsDenied(int requestCode, List<String> list) {
@@ -280,6 +263,7 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
 
     /**
      * Checks whether the device currently has a network connection.
+     *
      * @return true if the device has a network connection, false otherwise.
      */
     private boolean isDeviceOnline() {
@@ -291,8 +275,9 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
 
     /**
      * Check that Google Play services APK is installed and up to date.
+     *
      * @return true if Google Play Services is available and up to
-     *     date on this device; false otherwise.
+     * date on this device; false otherwise.
      */
     private boolean isGooglePlayServicesAvailable() {
         GoogleApiAvailability apiAvailability =
@@ -316,12 +301,12 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
         }
     }
 
-
     /**
      * Display an error dialog showing that Google Play Services is missing
      * or out of date.
+     *
      * @param connectionStatusCode code describing the presence (or lack of)
-     *     Google Play Services on this device.
+     *                             Google Play Services on this device.
      */
     void showGooglePlayServicesAvailabilityErrorDialog(
             final int connectionStatusCode) {
@@ -346,17 +331,17 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
             JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
             mService = new com.google.api.services.calendar.Calendar.Builder(
                     transport, jsonFactory, credential)
-                    .setApplicationName("Google Calendar API Android Quickstart")
+                    .setApplicationName("UWave Schedule")
                     .build();
         }
 
         /**
          * Background task to call Google Calendar API.
+         *
          * @param params no parameters needed for this task.
          */
         @Override
         protected List<String> doInBackground(Void... params) {
-
             try {
                 return getDataFromApi();
             } catch (Exception e) {
@@ -368,15 +353,16 @@ public class Schedule extends MainActivity implements NavigationView.OnNavigatio
 
         /**
          * Fetch a list of the next 10 events from the primary calendar.
+         *
          * @return List of Strings describing returned events.
+         * @throws IOException
          */
         private List<String> getDataFromApi() throws IOException {
-        //private List<String> getDataFromApi() {
             // List the next 10 events from the primary calendar.
             DateTime now = new DateTime(System.currentTimeMillis());
             List<String> eventStrings = new ArrayList<String>();
             Events events = mService.events().list("vfgkklo6vnqh4j7iu4b9ffqgvs@group.calendar.google.com")
-                    .setMaxResults(20)
+                    .setMaxResults(10)
                     .setTimeMin(now)
                     .setOrderBy("startTime")
                     .setSingleEvents(true)
