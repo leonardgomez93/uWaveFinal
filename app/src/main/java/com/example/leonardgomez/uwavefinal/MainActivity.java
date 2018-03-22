@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+
     private OggStreamPlayer player;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
