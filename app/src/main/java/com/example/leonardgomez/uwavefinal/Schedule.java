@@ -108,7 +108,7 @@ public class Schedule extends MainActivity implements EasyPermissions.Permission
         // Initialize credentials and service object.
         mCredential = GoogleAccountCredential.usingOAuth2(getApplicationContext(), Arrays.asList(SCOPES)).setBackOff(new ExponentialBackOff());
 
-        //setContentView(activityLayout);
+        setContentView(activityLayout);
         Intent uwaveCalendar = new Intent();
         uwaveCalendar.setType("vnd.android.cursor.item/event");
         uwaveCalendar.setAction(Intent.ACTION_VIEW);
@@ -220,11 +220,11 @@ public class Schedule extends MainActivity implements EasyPermissions.Permission
     /**
      * Respond to requests for permissions at runtime for API 23 and above.
      *
-     * @param requestCode  The request code passed in
-     *                     requestPermissions(android.app.Activity, String, int, String[])
+     * @param requestCode  The request code passed in requestPermissions(android.app.Activity, String, int, String[])
+     *
      * @param permissions  The requested permissions. Never null.
-     * @param grantResults The grant results for the corresponding permissions
-     *                     which is either PERMISSION_GRANTED or PERMISSION_DENIED. Never null.
+     *
+     * @param grantResults The grant results for the corresponding permissions which is either PERMISSION_GRANTED or PERMISSION_DENIED. Never null.
      */
     @Override
     public void onRequestPermissionsResult(int requestCode,
