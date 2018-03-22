@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public void playAsync(View view)
-    {
+    public void playAsync(View view) {
         player.playAsync("https://live.uwave.fm:8443/listen-128.ogg");
     }
 

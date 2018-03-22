@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UWave</string>
+    <string name="app_name">UWave Radio</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -9,16 +9,16 @@
     <string name="title_activity_schedule">Schedule</string>
     <string name="title_activity_my_wave">MyWave</string>
     <string name="title_activity_community">Community</string>
-    <string name="about_us_text">About Us
+    <string name="about_us_text">
 "UWave Radio is the campus-based community station of the Bothell area and beyond. We are a center for community engagement, a hub for underrepresented voices and music, an environment for professional development, and a catalyst for social justice.
 
 In 2012, a group of University of Washington Bothell students who shared a common interest in community media began building a radio station from scratch.We started broadcasting online in the spring of 2013 with a mixture of talk, music, and educational programming.
 
 Over the last year,we applied and were approved for a Low Power FM license from the FCC. You can view our future broadcast range here. Within the next year, we hope our listeners will be tuning in from their homes, work, cars, and online. We are growing every day!
 
-Business is in charge of the little details: underwriting content, legal inquiries, fundraising, connecting with local businesses, etc. Programming manages on-air content. They organize shows, curate the music library, and train new hosts and DJs.Promotions is the voice of UWave. They get the word out about volunteer opportunities, fundraisers and upcoming events.Technology runs the computers, website and audio equipment, including the studio and servers."
+Business is in charge of the little details: underwriting content, legal inquiries, fundraising, connecting with local businesses, etc. Programming manages on-air content. They organize shows, curate the music library, and train new hosts and DJs.Promotions is the voice of UWave. They get the word out about volunteer opportunities, fundraisers and upcoming events. Technology runs the computers, website and audio equipment, including the studio and servers."
 </string>
     <string name="schedule_text">"Schedule Coming Soon!"</string>
-    <string name="stream_button">"Live Stream Button"</string>
-<string name="API_KEY">AIzaSyBY_4H7JlaFciTsgnVDbRHEp_KGoVMbHLY</string>
+    <string name="stream_button"></string>
+<string name="API_KEY">AIzaSyAv3pYp_27948eauMzDIt2Np8UDhaysMMg</string>
 </resources>
