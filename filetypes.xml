@@ -1,0 +1,7 @@
+<application>
+  <component name="FileTypeManager" version="17">
+    <extensionMap>
+      <mapping pattern="sign_in_activity" type="XML" />
+    </extensionMap>
+  </component>
+</application>
