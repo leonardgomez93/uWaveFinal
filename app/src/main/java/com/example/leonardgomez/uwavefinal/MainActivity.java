@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    public void openLivePlayer(View view) {
+        Intent activity_live = new Intent(this, LivePlayer.class);
+        startActivity(activity_live);
+    }
+
     public void playAsync(View view)
     {
         player.playAsync("https://live.uwave.fm:8443/listen-128.ogg");
@@ -75,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             Intent activity_about = new Intent(this, AboutUs.class);
             startActivity(activity_about);
-        } else if (id == R.id.nav_schedule) {
+        }else if (id == R.id.nav_schedule) {
             Intent activity_schedule = new Intent(this, Schedule.class);
             startActivity(activity_schedule);
         } else if (id == R.id.nav_mywave) {
