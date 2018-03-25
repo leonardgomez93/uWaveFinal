@@ -1,4 +1,4 @@
-package com.example.leonardgomez.uwavefinal;
+package com.example.leonardgomez.uwavefinal.serviceforms;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -8,17 +8,20 @@ import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
 import android.webkit.WebSettings;
 
+import com.example.leonardgomez.uwavefinal.MainActivity;
+import com.example.leonardgomez.uwavefinal.R;
 
-public class MyWave extends MainActivity {
+
+public class RadioApplicationForm extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_wave);
+        setContentView(R.layout.activity_radio_app_form);
         WebView myWave = (WebView) findViewById(R.id.webview);
 
         WebSettings webSettings = myWave.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        myWave.loadUrl("https://docs.google.com/forms/d/e/1FAIpQLSfh8DdB22l7kjb_akwjjs8pPaW6XcwPccCK3FcRmcGrkVWBsA/viewform");
+        myWave.loadUrl("https://docs.google.com/forms/d/e/1FAIpQLSeu9Ii5Qh7j26SBZ0wVq3BZ-6kDb7oT1DtS1cf7NgAZgL89qA/viewform");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

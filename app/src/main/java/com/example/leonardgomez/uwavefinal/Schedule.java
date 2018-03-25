@@ -19,7 +19,6 @@ import com.google.api.services.calendar.model.*;
 
 import android.Manifest;
 import android.accounts.AccountManager;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -39,9 +38,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -60,6 +57,7 @@ public class Schedule extends MainActivity implements EasyPermissions.Permission
     private static final String BUTTON_TEXT = "Call Google Calendar API";
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = {CalendarScopes.CALENDAR_READONLY};
+
 
     /**
      * Create the main activity.
@@ -107,12 +105,12 @@ public class Schedule extends MainActivity implements EasyPermissions.Permission
         // Initialize credentials and service object.
         mCredential = GoogleAccountCredential.usingOAuth2(getApplicationContext(), Arrays.asList(SCOPES)).setBackOff(new ExponentialBackOff());
 
-        Intent uwaveCalendar = new Intent();
+        Intent uwaveCalendar = new Intent(Intent.ACTION_VIEW);
         uwaveCalendar.setType("vnd.android.cursor.item/event");
         uwaveCalendar.setAction(Intent.ACTION_VIEW);
         startActivity(uwaveCalendar);
 
-       super.onBackPressed();
+        super.onBackPressed();
     }
 
 
@@ -214,16 +212,14 @@ public class Schedule extends MainActivity implements EasyPermissions.Permission
                     getResultsFromApi();
                 }
                 break;
-            }
+        }
     }
 
     /**
      * Respond to requests for permissions at runtime for API 23 and above.
      *
      * @param requestCode  The request code passed in requestPermissions(android.app.Activity, String, int, String[])
-     *
      * @param permissions  The requested permissions. Never null.
-     *
      * @param grantResults The grant results for the corresponding permissions which is either PERMISSION_GRANTED or PERMISSION_DENIED. Never null.
      */
     @Override
@@ -361,7 +357,7 @@ public class Schedule extends MainActivity implements EasyPermissions.Permission
             // List the next 10 events from the primary calendar.
             DateTime now = new DateTime(System.currentTimeMillis());
             List<String> eventStrings = new ArrayList<String>();
-            Events events = mService.events().list("vfgkklo6vnqh4j7iu4b9ffqgvs@group.calendar.google.com")
+            Events events = mService.events().list("oungc1@uw.edu")
                     .setMaxResults(10)
                     .setTimeMin(now)
                     .setOrderBy("startTime")
