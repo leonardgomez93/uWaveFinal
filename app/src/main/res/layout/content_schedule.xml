@@ -16,6 +16,20 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="54dp" />
 
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="387px"
+        android:layout_height="189px"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/run_animation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline2">
+
+    </ProgressBar>
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
@@ -30,25 +44,26 @@
         app:layout_constraintTop_toBottomOf="@+id/guideline2"
         app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:id="@+id/stext"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:layout_marginBottom="91dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif"
-        android:padding="20dp"
-        android:text=""
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="5dp">
 
-    </TextView>
+        <TextView
+            android:id="@+id/stext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="91dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:padding="20dp"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="18sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="5dp">
+
+        </TextView>
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
