@@ -142,8 +142,7 @@ public class OggStreamPlayer
         playImpl();
     }
 
-    public void playAsync(String url)
-    {
+    public void playAsync(String url) {
         playAsync(getUrl(url));
     }
 

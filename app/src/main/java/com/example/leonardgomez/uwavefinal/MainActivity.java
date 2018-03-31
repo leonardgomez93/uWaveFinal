@@ -1,27 +1,33 @@
 package com.example.leonardgomez.uwavefinal;
 
-
+import com.example.leonardgomez.uwavefinal.uwavechat.*;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.widget.Toast;
 
-import com.example.leonardgomez.uwavefinal.serviceforms.PsaApplicationForm;
-import com.example.leonardgomez.uwavefinal.serviceforms.RadioApplicationForm;
-import com.example.leonardgomez.uwavefinal.uwavechat.ChatActivity;
-import com.example.leonardgomez.uwavefinal.uwavechat.SignInActivity;
-import com.example.leonardgomez.uwavefinal.uwavechat.UWaveChatMessage;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.example.leonardgomez.uwavefinal.serviceforms.*;
+
+
+public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
     private OggStreamPlayer player;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +36,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         player = new OggStreamPlayer();
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -60,18 +69,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks heres.
+        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
             Intent activity_home = new Intent(this, MainActivity.class);
             startActivity(activity_home);
-        } else if (id == R.id.nav_about) {
-            Intent activity_about = new Intent(this, AboutUs.class);
-            startActivity(activity_about);
+        } else if (id == R.id.nav_chat) {
+            Intent activity_chat = new Intent(this, Login.class);
+            startActivity(activity_chat);
+            Toast.makeText(getApplicationContext(),"Welcome to UWave's live chat!",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_schedule) {
             Intent activity_schedule = new Intent(this, Schedule.class);
             startActivity(activity_schedule);
@@ -81,15 +92,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_radio_app_form) {
             Intent activity_radio_form = new Intent(this, RadioApplicationForm.class);
             startActivity(activity_radio_form);
-        } else if(id == R.id.nav_chat) {
-            Intent activity_sign_in = new Intent(this, SignInActivity.class);
-            startActivity(activity_sign_in);
+        } else if(id == R.id.nav_about) {
+            Intent activity_about_us = new Intent(this, AboutUs.class);
+            startActivity(activity_about_us);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 
 }

@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
 
     <application
@@ -26,7 +27,6 @@
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
 
             <intent-filter>
@@ -36,7 +36,6 @@
             </intent-filter>
 
         </activity>
-
 
         <activity
             android:name=".AboutUs"
@@ -73,50 +72,39 @@
         </activity>
 
 
-        <activity android:name=".uwavechat.SignInActivity"/>
-
-        <activity android:name=".uwavechat.ChatActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:host="https://uwave-198615.firebaseio.com"
-                    android:scheme="http"
-                    android:pathPrefix="/message" />
-            </intent-filter>
-        </activity>
-
         <activity
             android:name=".serviceforms.RadioApplicationForm"
             android:label="@string/title_activity_radio_app_form"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
         </activity>
 
-
-
         <service
-            android:name=".uwavechat.MyFirebaseMessagingService">
+            android:name=".uwavechat.MyFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 
         <service
-            android:name=".uwavechat.MyFirebaseInstanceIDService">
+            android:name=".uwavechat.MyFirebaseInstanceIDService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
 
+        <activity android:name=".uwavechat.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".uwavechat.Register" />
+        <activity android:name=".uwavechat.Users" />
+        <activity android:name=".uwavechat.Chat" />
 
     </application>
 
