@@ -1,6 +1,8 @@
 package com.example.leonardgomez.uwavefinal;
 
+import com.example.leonardgomez.uwavefinal.livestream.*;
 import com.example.leonardgomez.uwavefinal.uwavechat.*;
+import com.example.leonardgomez.uwavefinal.serviceforms.*;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -12,22 +14,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-import com.example.leonardgomez.uwavefinal.serviceforms.*;
-
-
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
     private OggStreamPlayer player;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     public void stop(View view) {
-
         player.stop();
     }
 
@@ -70,10 +60,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
@@ -100,5 +87,4 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

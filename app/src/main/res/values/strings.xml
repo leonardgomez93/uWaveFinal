@@ -1,55 +1,1 @@
-<resources>
-    <string name="app_name">UWave Radio</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_about_us">About Us</string>
-    <string name="title_activity_schedule">Schedule</string>
-    <string name="title_activity_psa_form">Submit a PSA</string>
-    <string name="title_activity_radio_app_form">Host a Show</string>
-    <string name="about_us_text">
-"UWave Radio is the campus-based community station of the Bothell area and beyond. We are a center for community engagement, a hub for underrepresented voices and music, an environment for professional development, and a catalyst for social justice.
-
-In 2012, a group of University of Washington Bothell students who shared a common interest in community media began building a radio station from scratch.We started broadcasting online in the spring of 2013 with a mixture of talk, music, and educational programming.
-
-Over the last year,we applied and were approved for a Low Power FM license from the FCC. You can view our future broadcast range here. Within the next year, we hope our listeners will be tuning in from their homes, work, cars, and online. We are growing every day!
-
-Business is in charge of the little details: underwriting content, legal inquiries, fundraising, connecting with local businesses, etc.
-
-Programming manages on-air content. They organize shows, curate the music library, and train new hosts and DJs.
-
-Promotions is the voice of UWave. They get the word out about volunteer opportunities, fundraisers and upcoming events.
-
-Technology runs the computers, website and audio equipment, including the studio and servers."
-
-</string>
-    <string name="schedule_text">"Schedule Coming Soon!"</string>
-    <string name="stream_button"></string>
-    <string name="contact_us">Contact UWave
-    "If you have any questions or otherwise need to get in touch with us, the best way is just to email info@uwave.fm.
-To contact a speciic department:
-Business: business@uwave.fm
-Programming: programming@uwave.fm
-Promotions: promotions@uwave.fm
-Technology: tech@uwave.fm
-"</string>
-    <string name="community_text">Coming Soon!</string>
-    <string name="API_KEY">AIzaSyAv3pYp_27948eauMzDIt2Np8UDhaysMMg</string>
-
-    <string name="welcome_msg">Welcome!</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="contacts_permission_rationale">Access to account information is required to sign in.</string>
-    <string name="invite_menu_label">Invite</string>
-    <string name="invitation_message">Please join me for a friendly chat</string>
-    <string name="invitation_cta">Call to action</string>
-    <string name="invitation_title">UWave Chat Invite</string>
-    <string name="sign_in">Sign In</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="fresh_config">Fresh Config</string>
-    <string name="cause_crash">Cause Crash</string>
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-
-    <string name="chat_placeholder_text">UWave Live Chat (Coming Soon)</string>
-</resources>
+<resources>    <string name="app_name">UWave Radio</string>    <string name="navigation_drawer_open">Open navigation drawer</string>    <string name="navigation_drawer_close">Close navigation drawer</string>    <string name="action_settings">Settings</string>    <string name="title_activity_about_us">About Us</string>    <string name="title_activity_schedule">Schedule</string>    <string name="title_activity_psa_form">Submit a PSA</string>    <string name="title_activity_radio_app_form">Host a Show</string>    <string name="about_us_text">"UWave Radio is the campus-based community station of the Bothell area and beyond. We are a center for community engagement, a hub for underrepresented voices and music, an environment for professional development, and a catalyst for social justice.In 2012, a group of University of Washington Bothell students who shared a common interest in community media began building a radio station from scratch.We started broadcasting online in the spring of 2013 with a mixture of talk, music, and educational programming.Over the last year,we applied and were approved for a Low Power FM license from the FCC. You can view our future broadcast range here. Within the next year, we hope our listeners will be tuning in from their homes, work, cars, and online. We are growing every day!Business is in charge of the little details: underwriting content, legal inquiries, fundraising, connecting with local businesses, etc.Programming manages on-air content. They organize shows, curate the music library, and train new hosts and DJs.Promotions is the voice of UWave. They get the word out about volunteer opportunities, fundraisers and upcoming events.Technology runs the computers, website and audio equipment, including the studio and servers.If you have any questions or otherwise need to get in touch with us, the best way is just to email info@uwave.fmTo contact a specific department:• Business - business@uwave.fm• Programming - programming@uwave.fm• Promotions - promotions@uwave.fm• Technology - tech@uwave.fm"    </string>    <string name="schedule_text">"Schedule Coming Soon!"</string>    <string name="stream_button"></string>    <string name="contact_us">Contact UWave    "If you have any questions or otherwise need to get in touch with us, the best way is just to email info@uwave.fm.To contact a specific department:Business: business@uwave.fmProgramming: programming@uwave.fmPromotions: promotions@uwave.fmTechnology: tech@uwave.fm"</string>    <string name="community_text">Coming Soon!</string>    <string name="API_KEY">AIzaSyAv3pYp_27948eauMzDIt2Np8UDhaysMMg</string>    <string name="sign_out">Sign Out</string>    <string name="contacts_permission_rationale">Access to account information is required to sign in.</string>    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>    <string name="chat_placeholder_text">UWave Live Chat (Coming Soon)</string></resources>
