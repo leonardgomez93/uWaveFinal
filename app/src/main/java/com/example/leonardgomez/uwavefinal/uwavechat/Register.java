@@ -54,38 +54,32 @@ public class Register extends AppCompatActivity {
                 user = username.getText().toString();
                 pass = password.getText().toString();
 
-                if(user.equals("")){
+                if (user.equals("")) {
                     username.setError("can't be blank");
-                }
-                else if(pass.equals("")){
+                } else if (pass.equals("")) {
                     password.setError("can't be blank");
-                }
-                else if(!user.matches("[A-Za-z0-9]+")){
+                } else if (!user.matches("[A-Za-z0-9]+")) {
                     username.setError("only alphabet or number allowed");
-                }
-                else if(user.length()<5){
+                } else if (user.length() < 5) {
                     username.setError("at least 5 characters long");
-                }
-                else if(pass.length()<5){
+                } else if (pass.length() < 5) {
                     password.setError("at least 5 characters long");
-                }
-                else {
+                } else {
                     final ProgressDialog pd = new ProgressDialog(Register.this);
                     pd.setMessage("Loading...");
                     pd.show();
 
                     String url = "https://uwave-198615.firebaseio.com/users.json";
 
-                    StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
+                    StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String s) {
                             Firebase reference = new Firebase("https://uwave-198615.firebaseio.com/users");
 
-                            if(s.equals("null")) {
+                            if (s.equals("null")) {
                                 reference.child(user).child("password").setValue(pass);
                                 Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
-                            }
-                            else {
+                            } else {
                                 try {
                                     JSONObject obj = new JSONObject(s);
 
@@ -104,10 +98,10 @@ public class Register extends AppCompatActivity {
                             pd.dismiss();
                         }
 
-                    },new Response.ErrorListener(){
+                    }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-                            System.out.println("" + volleyError );
+                            System.out.println("" + volleyError);
                             pd.dismiss();
                         }
                     });
@@ -115,6 +109,7 @@ public class Register extends AppCompatActivity {
                     RequestQueue rQueue = Volley.newRequestQueue(Register.this);
                     rQueue.add(request);
                 }
+
             }
         });
     }
