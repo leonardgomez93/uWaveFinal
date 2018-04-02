@@ -79,7 +79,7 @@ public class Register extends AppCompatActivity {
                     StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
                         @Override
                         public void onResponse(String s) {
-                            Firebase reference = new Firebase("https://uwave-198615.firebaseio.com/users.json");
+                            Firebase reference = new Firebase("https://uwave-198615.firebaseio.com/users");
 
                             if(s.equals("null")) {
                                 reference.child(user).child("password").setValue(pass);
