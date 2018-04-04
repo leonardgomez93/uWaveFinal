@@ -77,28 +77,30 @@ public class Schedule extends MainActivity {
 
 
     class fetchData extends AsyncTask<Void, Integer, Void> {
-        ProgressDialog progressDialog;
         String data = "";
         String dataParsed = "";
         String singleParsed = "";
         String s = "";
         CalendarEvents ces = new CalendarEvents();
+        int max = 100;
+
 
         @Override
         protected void onPreExecute()
         {
             progressBar = (ProgressBar) findViewById(R.id.progressBar);
             progressBar.setVisibility(View.VISIBLE);
+
         }
         @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
+        protected void onProgressUpdate(Integer... values){
             progressBar.setProgress(values[0]);
-
         }
 
+
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(Void... values) {
+
             try {
                 URL url = new URL("https://ical-to-json.herokuapp.com/convert.json?url=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Fical%2Fvfgkklo6vnqh4j7iu4b9ffqgvs%2540group.calendar.google.com%2Fpublic%2Fbasic.ics");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -163,7 +165,8 @@ public class Schedule extends MainActivity {
             progressBar.setVisibility(View.INVISIBLE);
             ces.printContents();
 
+            }
         }
     }
-}
+
 
