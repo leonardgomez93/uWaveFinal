@@ -4,6 +4,11 @@ package com.example.leonardgomez.uwavefinal.uwavechat;
  * Created by chrisoung on 3/30/18.
  */
 
+
+import com.example.leonardgomez.uwavefinal.R;
+import com.example.leonardgomez.uwavefinal.uwavechat.*;
+
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;

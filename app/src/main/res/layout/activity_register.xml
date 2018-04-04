@@ -14,10 +14,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register to Chat"
-        android:textSize="30dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:layout_marginBottom="20dp"/>
+        android:text="UWave Chat Registration"
+        android:textColorLink="@android:color/background_dark"
+        android:textSize="30dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -45,11 +46,11 @@
         android:layout_marginBottom="20dp"/>
 
     <TextView
+        android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Click here to login"
-        android:textSize="20dp"
         android:gravity="center"
-        android:id="@+id/login"/>
+        android:text="Already a member? Click here to login"
+        android:textSize="18sp" />
 
 </LinearLayout>

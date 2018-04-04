@@ -1,6 +1,7 @@
 package com.example.leonardgomez.uwavefinal.uwavechat;
 
 import com.example.leonardgomez.uwavefinal.R;
+import com.example.leonardgomez.uwavefinal.uwavechat.*;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -34,10 +35,10 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        username = (EditText)findViewById(R.id.username);
-        password = (EditText)findViewById(R.id.password);
-        registerButton = (Button)findViewById(R.id.registerButton);
-        login = (TextView)findViewById(R.id.login);
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
+        registerButton = (Button) findViewById(R.id.registerButton);
+        login = (TextView) findViewById(R.id.login);
 
         Firebase.setAndroidContext(this);
 
@@ -114,3 +115,4 @@ public class Register extends AppCompatActivity {
         });
     }
 }
+

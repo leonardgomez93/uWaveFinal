@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         } else if (id == R.id.nav_chat) {
             Intent activity_chat = new Intent(this, Login.class);
             startActivity(activity_chat);
-            Toast.makeText(getApplicationContext(),"Welcome to UWave's live chat!",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_schedule) {
             Intent activity_schedule = new Intent(this, Schedule.class);
             startActivity(activity_schedule);

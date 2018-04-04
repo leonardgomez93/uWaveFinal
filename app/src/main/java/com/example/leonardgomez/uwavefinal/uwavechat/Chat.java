@@ -1,5 +1,8 @@
 package com.example.leonardgomez.uwavefinal.uwavechat;
 
+import com.example.leonardgomez.uwavefinal.R;
+import com.example.leonardgomez.uwavefinal.uwavechat.*;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -15,21 +18,16 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.leonardgomez.uwavefinal.MainActivity;
-import com.example.leonardgomez.uwavefinal.R;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
-import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.example.leonardgomez.uwavefinal.R.drawable.bubble_out;
 
 
 public class Chat extends AppCompatActivity {
@@ -122,10 +120,10 @@ public class Chat extends AppCompatActivity {
 
         if (type == 1) {
             lp2.gravity = Gravity.RIGHT;
-            textView.setBackgroundResource(R.drawable.bubble_out);
+            textView.setBackgroundResource(R.drawable.bubble_in);
         } else {
             lp2.gravity = Gravity.LEFT;
-            textView.setBackgroundResource(R.drawable.bubble_in);
+            textView.setBackgroundResource(R.drawable.bubble_out);
         }
         textView.setLayoutParams(lp2);
         layout.addView(textView);

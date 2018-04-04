@@ -19,8 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:text="UWave Live Chat Login"
+        android:text="UWave Chat Login"
         android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColorLink="@android:color/background_dark"
         android:textSize="30dp" />
 
     <EditText
@@ -42,18 +43,18 @@
         android:layout_marginBottom="10dp"/>
 
     <Button
+        android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/loginButton"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:text="Login" />
 
     <TextView
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Click here to register"
-        android:textSize="20dp"
         android:gravity="center"
-        android:id="@+id/register"/>
+        android:text="Register to chat"
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -1,6 +1,8 @@
 package com.example.leonardgomez.uwavefinal.uwavechat;
 
 import com.example.leonardgomez.uwavefinal.R;
+import com.example.leonardgomez.uwavefinal.uwavechat.*;
+
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -73,6 +75,7 @@ public class Users extends AppCompatActivity {
 
     public void doOnSuccess(String s){
         try {
+
             JSONObject obj = new JSONObject(s);
 
             Iterator i = obj.keys();

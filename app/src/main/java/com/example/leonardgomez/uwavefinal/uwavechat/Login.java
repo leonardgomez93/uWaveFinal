@@ -4,6 +4,7 @@ package com.example.leonardgomez.uwavefinal.uwavechat;
  * Created by chrisoung on 3/30/18.
  */
 import com.example.leonardgomez.uwavefinal.R;
+import com.example.leonardgomez.uwavefinal.uwavechat.*;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -22,6 +23,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +55,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         registerUser = (TextView) findViewById(R.id.register);
         username = (EditText) findViewById(R.id.username);
