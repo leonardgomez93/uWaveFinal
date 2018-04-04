@@ -82,7 +82,7 @@ public class Schedule extends MainActivity {
         String singleParsed = "";
         String s = "";
         CalendarEvents ces = new CalendarEvents();
-        int max = 100;
+        //int max = 100;
 
 
         @Override
