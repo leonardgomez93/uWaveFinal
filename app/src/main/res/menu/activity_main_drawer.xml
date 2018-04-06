@@ -17,12 +17,16 @@
             android:icon="@drawable/ic_schedule_black_24dp"
             android:title="Schedule" />
         <item
+            android:id="@+id/nav_archive"
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="Archive" />
+        <item
             android:id="@+id/nav_psa_form"
             android:icon="@drawable/ic_menu_send"
             android:title="Submit a PSA" />
         <item
             android:id="@+id/nav_radio_app_form"
-            android:icon="@drawable/ic_people_black_24dp"
+            android:icon="@drawable/ic_menu_send"
             android:title="Host a Talk Show"/>
 
         <item

@@ -97,15 +97,23 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".uwavechat.Login">
+        <activity
+            android:name=".uwavechat.Login">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".uwavechat.Register" />
         <activity android:name=".uwavechat.Users" />
         <activity android:name=".uwavechat.Chat" />
+        <activity
+            android:name=".archive.MixCloud"
+            android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
+
+        </activity>
 
     </application>
 

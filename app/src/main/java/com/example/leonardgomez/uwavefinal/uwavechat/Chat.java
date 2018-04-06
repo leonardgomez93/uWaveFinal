@@ -37,12 +37,12 @@ public class Chat extends AppCompatActivity {
     EditText messageArea;
     ScrollView scrollView;
     Firebase reference1, reference2;
-    private ListView listView;
-    private View btnSend;
-    private EditText editText;
+    //private ListView listView;
+    //private View btnSend;
+   // private EditText editText;
     boolean myMessage = true;
-    private List<ChatBubble> ChatBubbles;
-    private ArrayAdapter<ChatBubble> adapter;
+    //private List<ChatBubble> ChatBubbles;
+    //private ArrayAdapter<ChatBubble> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +83,9 @@ public class Chat extends AppCompatActivity {
                 String userName = map.get("user").toString();
 
                 if (userName.equals(UserDetails.username)) {
-                    addMessageBox("You:-\n" + message, 1);
+                    addMessageBox("You: \n" + message, 1);
                 } else {
-                    addMessageBox(UserDetails.chatWith + ":-\n" + message, 2);
+                    addMessageBox(UserDetails.chatWith + ": \n" + message, 2);
                 }
             }
 

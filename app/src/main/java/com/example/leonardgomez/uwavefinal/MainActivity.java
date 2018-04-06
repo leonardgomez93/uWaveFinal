@@ -1,8 +1,9 @@
 package com.example.leonardgomez.uwavefinal;
 
 import com.example.leonardgomez.uwavefinal.livestream.*;
-import com.example.leonardgomez.uwavefinal.uwavechat.*;
 import com.example.leonardgomez.uwavefinal.serviceforms.*;
+import com.example.leonardgomez.uwavefinal.uwavechat.*;
+import com.example.leonardgomez.uwavefinal.archive.*;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         } else if (id == R.id.nav_chat) {
             Intent activity_chat = new Intent(this, Login.class);
             startActivity(activity_chat);
+        } else if (id == R.id.nav_archive) {
+            Intent activity_archive = new Intent(this, MixCloud.class);
+            startActivity(activity_archive);
         } else if (id == R.id.nav_schedule) {
             Intent activity_schedule = new Intent(this, Schedule.class);
             startActivity(activity_schedule);
