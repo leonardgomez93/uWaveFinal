@@ -19,7 +19,7 @@
         <item
             android:id="@+id/nav_archive"
             android:icon="@drawable/ic_people_black_24dp"
-            android:title="Archive" />
+            android:title="@string/title_activity_archive" />
         <item
             android:id="@+id/nav_psa_form"
             android:icon="@drawable/ic_menu_send"

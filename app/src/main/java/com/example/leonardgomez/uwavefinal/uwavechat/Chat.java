@@ -3,9 +3,15 @@ package com.example.leonardgomez.uwavefinal.uwavechat;
 import com.example.leonardgomez.uwavefinal.R;
 import com.example.leonardgomez.uwavefinal.uwavechat.*;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -37,12 +43,8 @@ public class Chat extends AppCompatActivity {
     EditText messageArea;
     ScrollView scrollView;
     Firebase reference1, reference2;
-    //private ListView listView;
-    //private View btnSend;
-   // private EditText editText;
     boolean myMessage = true;
-    //private List<ChatBubble> ChatBubbles;
-    //private ArrayAdapter<ChatBubble> adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,8 @@ public class Chat extends AppCompatActivity {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://uwave-198615.firebaseio.com/messages/" + UserDetails.username + "_" + UserDetails.chatWith);
-        reference2 = new Firebase("https://uwave-198615.firebaseio.com/messages/" + UserDetails.chatWith + "_" + UserDetails.username);
+        reference1 = new Firebase("https://uwave-198615.firebaseio.com/chats/" + UserDetails.username + "_" + UserDetails.chatWith);
+        reference2 = new Firebase("https://uwave-198615.firebaseio.com/chats/" + UserDetails.chatWith + "_" + UserDetails.username);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +111,7 @@ public class Chat extends AppCompatActivity {
 
             }
         });
+
     }
 
     public void addMessageBox(String message, int type) {
@@ -129,4 +132,6 @@ public class Chat extends AppCompatActivity {
         layout.addView(textView);
         scrollView.fullScroll(View.FOCUS_DOWN);
     }
+
+
 }

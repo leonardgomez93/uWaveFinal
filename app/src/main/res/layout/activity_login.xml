@@ -57,4 +57,12 @@
         android:text="Register to chat"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/guest_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="View chats"
+        android:textSize="18sp" />
+
 </LinearLayout>

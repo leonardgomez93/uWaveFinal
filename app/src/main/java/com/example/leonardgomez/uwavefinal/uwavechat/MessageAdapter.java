@@ -16,8 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.leonardgomez.uwavefinal.R;
-
 import java.util.List;
 
 public class MessageAdapter extends ArrayAdapter<ChatBubble> {

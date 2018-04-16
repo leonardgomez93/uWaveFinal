@@ -44,7 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
-    TextView registerUser;
+    TextView registerUser, guestUser;
     EditText username;
     EditText password;
     Button loginButton;
@@ -56,7 +56,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        guestUser = (TextView) findViewById(R.id.guest_user);
         registerUser = (TextView) findViewById(R.id.register);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
@@ -66,6 +66,13 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, Register.class));
+            }
+        });
+
+        guestUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, Guest.class));
             }
         });
 
@@ -81,6 +88,7 @@ public class Login extends AppCompatActivity {
                     password.setError("can't be blank");
                 } else {
                     String url = "https://uwave-198615.firebaseio.com/users.json";
+                    /*originally user.json*/
                     final ProgressDialog pd = new ProgressDialog(Login.this);
                     pd.setMessage("Loading...");
                     pd.show();
@@ -88,35 +96,47 @@ public class Login extends AppCompatActivity {
                     StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String s) {
+
                             if (s.equals("null")) {
                                 Toast.makeText(Login.this, "user not found", Toast.LENGTH_LONG).show();
                             } else {
+
                                 try {
                                     JSONObject obj = new JSONObject(s);
-
                                     if (!obj.has(user)) {
                                         Toast.makeText(Login.this, "user not found", Toast.LENGTH_LONG).show();
-                                    } else if (obj.getJSONObject(user).getString("password").equals(pass)) {
+
+                                    }
+                                    else if (obj.getJSONObject(user).getString("password").equals(pass)) {
+
                                         UserDetails.username = user;
                                         UserDetails.password = pass;
                                         startActivity(new Intent(Login.this, Users.class));
-                                    } else {
+
+                                    }
+                                    else {
                                         Toast.makeText(Login.this, "incorrect password", Toast.LENGTH_LONG).show();
                                     }
-                                } catch (JSONException e) {
+                                }
+
+                                catch (JSONException e) {
                                     e.printStackTrace();
+
                                 }
                             }
 
                             pd.dismiss();
                         }
-                    }, new Response.ErrorListener() {
+
+                        }, new Response.ErrorListener() {
+
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
                             System.out.println("" + volleyError);
                             pd.dismiss();
                         }
                     });
+
 
                     RequestQueue rQueue = Volley.newRequestQueue(Login.this);
                     rQueue.add(request);
