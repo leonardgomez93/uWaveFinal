@@ -1,188 +1,188 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <animation-list
-    android:oneshot="false"
+    android:oneshot="true"
     android:indeterminate="true"
     android:indeterminateBehavior="cycle"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:drawable="@drawable/uwave_animations1"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations2"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations3"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations4"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations5"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations6"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations7"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations8"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations9"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations10"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations11"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations12"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations13"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations14"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations15"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations16"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations17"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations18"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations19"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations20"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations21"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations22"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations23"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations24"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations25"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations26"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations27"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations28"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations29"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations30"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations31"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations32"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations33"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations34"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations35"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations36"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations37"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations38"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations39"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations40"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations41"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations42"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations43"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations44"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations45"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations46"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations47"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations48"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations49"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations50"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations51"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations52"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations53"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations54"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations55"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations56"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations57"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations58"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations59"
-        android:duration="5" />
+        android:duration="25" />
     <item
         android:drawable="@drawable/uwave_animations60"
-        android:duration="5" />
+        android:duration="25" />
 
 </animation-list>
