@@ -28,9 +28,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         player = new OggStreamPlayer();
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             Intent activity_chat = new Intent(this, Login.class); //changed from login to users.
             startActivity(activity_chat);
         } else if (id == R.id.nav_archive) {
-            Intent activity_archive = new Intent(this, Guest.class);
+            Intent activity_archive = new Intent(this, Forum.class);
             startActivity(activity_archive);
         } else if (id == R.id.nav_schedule) {
             Intent activity_schedule = new Intent(this, Schedule.class);

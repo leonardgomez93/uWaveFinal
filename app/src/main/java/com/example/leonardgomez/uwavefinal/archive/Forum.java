@@ -25,7 +25,7 @@ public class Forum extends MainActivity {
 
         WebSettings webSettings = psa.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        psa.loadUrl("file:///android_asset/uwavearchive.html");
+        psa.loadUrl("file:///android_asset/uwave_archive2.html");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
