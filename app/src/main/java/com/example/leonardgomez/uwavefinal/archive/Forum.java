@@ -13,7 +13,7 @@ import android.webkit.WebSettings;
 import com.example.leonardgomez.uwavefinal.MainActivity;
 import com.example.leonardgomez.uwavefinal.R;
 
-
+//Forum class for mixcloud
 
 public class Forum extends MainActivity {
     @Override
