@@ -5,17 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.leonardgomez.uwavefinal.LivePlayer">
-    <!--tools:showIn="@layout/activity_live_player"-->
+    <!--tools:showIn="@layout/activity_live_player"> -->
+
+    <TextView
+        android:id="@+id/songName"
+        android:layout_width="308dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="Song Name"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/artistAndAlbum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/artistAndAlbum"
+        android:layout_width="308dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="Artist - Album"
+        android:textColor="@android:color/background_light"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/playButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/playButton"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:onClick="playAsync"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,56 +53,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/play_button" />
 
-    <ImageButton
-        android:id="@+id/rewindButton"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_marginBottom="76dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginStart="8dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/playButton"
-        app:layout_constraintHorizontal_bias="0.967"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/skip_back_button" />
 
-    <ImageButton
-        android:id="@+id/stopButton"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_marginBottom="76dp"
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="56dp"
-        android:background="@android:color/transparent"
-        android:onClick="stop"
+        android:layout_marginStart="8dp"
+        android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/songName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/playButton"
-        app:srcCompat="@drawable/stop_button" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="308dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="308dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/playButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/btn_dialog" />
 </android.support.constraint.ConstraintLayout>

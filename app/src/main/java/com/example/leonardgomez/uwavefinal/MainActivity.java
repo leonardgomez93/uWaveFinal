@@ -15,7 +15,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 
@@ -23,8 +22,6 @@ import android.content.Intent;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
-    private OggStreamPlayer player;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +29,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        player = new OggStreamPlayer();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -41,21 +37,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     public void openLivePlayer(View view) {
         Intent activity_live = new Intent(this, LivePlayer.class);
         startActivity(activity_live);
-    }
-
-    public void playAsync(View view)
-    {
-        player.playAsync("https://live.uwave.fm:8443/listen-128.ogg");
-    }
-
-    public void stop(View view)
-    {
-        player.stop();
     }
 
     @Override
@@ -80,7 +67,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             Intent activity_about = new Intent(this, AboutUs.class);
             startActivity(activity_about);
-        }else if (id == R.id.nav_schedule) {
+        } else if (id == R.id.nav_schedule) {
             Intent activity_schedule = new Intent(this, Schedule.class);
             startActivity(activity_schedule);
         } else if (id == R.id.nav_mywave) {

@@ -89,7 +89,7 @@ public class OggStreamPlayer
     private Comment jorbisComment;
     private Info jorbisInfo;
     private AudioTrack track;
-    private boolean isStopped = false;
+    private boolean isStopped = true;
 
     private OggStreamPlayerCallback playerCallback;
 
@@ -145,6 +145,10 @@ public class OggStreamPlayer
     public void playAsync(String url)
     {
         playAsync(getUrl(url));
+    }
+
+    public boolean isStopped() {
+        return isStopped;
     }
 
     public void playAsync(final URL url)
