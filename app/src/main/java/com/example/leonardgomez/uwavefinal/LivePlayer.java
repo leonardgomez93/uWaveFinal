@@ -51,9 +51,14 @@ public class LivePlayer extends MainActivity {
             MediaSessionCompat.Token token = mMediaBrowser.getSessionToken();
 
             // Create a MediaControllerCompat
-            MediaControllerCompat mediaController =
-                    new MediaControllerCompat(LivePlayer.this, // Context
-                            token);
+            MediaControllerCompat mediaController;
+            try {
+                mediaController =
+                        new MediaControllerCompat(LivePlayer.this, // Context
+                                token);
+            } catch(RemoteException e) {
+                e.printStackTrace();
+            }
 
             // Save the controller
             MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
@@ -73,13 +78,15 @@ public class LivePlayer extends MainActivity {
         }
     };
 
-    private final MediaControllerCompat.Callback controllerCallback =
+    MediaControllerCompat.Callback controllerCallback =
             new MediaControllerCompat.Callback() {
                 @Override
-                public void onMetadataChanged(MediaMetadataCompat metadata) {}
+                public void onMetadataChanged(MediaMetadataCompat metadata) {
+                }
 
                 @Override
-                public void onPlaybackStateChanged(PlaybackStateCompat state) {}
+                public void onPlaybackStateChanged(PlaybackStateCompat state) {
+                }
             };
 
     void buildTransportControls() {
@@ -88,28 +95,28 @@ public class LivePlayer extends MainActivity {
 
         // Attach a listener to the button
         playStopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Since this is a play/pause button, you'll need to test the current state
-                // and choose the action accordingly
+                                              @Override
+                                              public void onClick(View v) {
+                                                  // Since this is a play/pause button, you'll need to test the current state
+                                                  // and choose the action accordingly
 
-                int pbState = MediaControllerCompat.getMediaController(LivePlayer.this).getPlaybackState().getState();
-                if (pbState == PlaybackStateCompat.STATE_PLAYING) {
-                    MediaControllerCompat.getMediaController(LivePlayer.this).getTransportControls().stop();
-                } else {
-                    MediaControllerCompat.getMediaController(LivePlayer.this).getTransportControls().play();
-                }
-            }
+                                                  int pbState = MediaControllerCompat.getMediaController(LivePlayer.this).getPlaybackState().getState();
+                                                  if (pbState == PlaybackStateCompat.STATE_PLAYING) {
+                                                      MediaControllerCompat.getMediaController(LivePlayer.this).getTransportControls().stop();
+                                                  } else {
+                                                      MediaControllerCompat.getMediaController(LivePlayer.this).getTransportControls().play();
+                                                  }
+                                              }
+                                          });
 
-            MediaControllerCompat mediaController = MediaControllerCompat.getMediaController(LivePlayer.this);
+        MediaControllerCompat mediaController = MediaControllerCompat.getMediaController(LivePlayer.this);
 
-            // Display the initial state
-            MediaMetadataCompat metadata = mediaController.getMetadata();
-            PlaybackStateCompat pbState = mediaController.getPlaybackState();
+        // Display the initial state
+        MediaMetadataCompat metadata = mediaController.getMetadata();
+        PlaybackStateCompat pbState = mediaController.getPlaybackState();
 
-            // Register a Callback to stay in sync
-            mediaController.registerCallback(controllerCallback);
-        });
+        // Register a Callback to stay in sync
+        mediaController.registerCallback(controllerCallback);
     }
 
     @Override
@@ -157,8 +164,8 @@ public class LivePlayer extends MainActivity {
 
     class fetchSongData extends AsyncTask<Void, Void, Void> {
         String data = "";
-        TextView songName = (TextView)findViewById(R.id.songName);
-        TextView artistAndAlbumName = (TextView)findViewById(R.id.artistAndAlbum);
+        TextView songName = (TextView) findViewById(R.id.songName);
+        TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
         String song = "";
         String artistAndAlbum = "";
 
@@ -170,9 +177,9 @@ public class LivePlayer extends MainActivity {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = "";
-                while(line != null) {
+                while (line != null) {
                     line = bufferedReader.readLine();
-                    if(line != null) {
+                    if (line != null) {
                         data += line;
                     }
                 }
@@ -180,15 +187,16 @@ public class LivePlayer extends MainActivity {
                 try {
                     JSONObject songData = new JSONObject(data);
                     song = songData.getString("title");
-                    if(songData.getString("artist").equals("") && songData.getString("album").equals("")) {
+                    if (songData.getString("artist").equals("") && songData.getString("album").equals("")) {
                         artistAndAlbumName.setVisibility(View.INVISIBLE);
-                    }else artistAndAlbum = songData.getString("artist") + " - " + songData.getString("album");
-                }catch (JSONException e) {
+                    } else
+                        artistAndAlbum = songData.getString("artist") + " - " + songData.getString("album");
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }catch (MalformedURLException e) {
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
-            }catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
                 throw new Error("Failed.");
             }
@@ -202,87 +210,5 @@ public class LivePlayer extends MainActivity {
             artistAndAlbumName.setText(artistAndAlbum);
         }
     }
-
-    /**
-     * Customize the connection to our {@link android.support.v4.media.MediaBrowserServiceCompat}
-     * and implement our app specific desires.
-     */
-    private class MediaBrowserConnection extends MediaBrowserHelper {
-        private MediaBrowserConnection(Context context) {
-            super(context, MediaBrowserService.class);
-        }
-
-        @Override
-        protected void onConnected(@NonNull MediaControllerCompat mediaController) {
-            //Get token for the MediaSession
-            MediaSessionCompat.Token token = mMediaBrowser.getSessionToken();
-
-            //Create a MediaControllerCompat
-            MediaControllerCompat mediaController = new MediaControllerCompat(LivePlayer.this, token);
-
-            //Save the controller
-            MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
-
-            //Finish building the UI
-            buildTransportControls();
-        }
-
-        @Override
-        protected void onChildrenLoaded(@NonNull String parentId,
-                                        @NonNull List<MediaBrowserCompat.MediaItem> children) {
-            super.onChildrenLoaded(parentId, children);
-
-            final MediaControllerCompat mediaController = getMediaController();
-
-            // Queue up all media items for this simple sample.
-            for (final MediaBrowserCompat.MediaItem mediaItem : children) {
-                mediaController.addQueueItem(mediaItem.getDescription());
-            }
-
-            // Call prepare now so pressing play just works.
-            mediaController.getTransportControls().prepare();
-        }
-    }
-
-    /**
-     * Implementation of the {@link MediaControllerCompat.Callback} methods we're interested in.
-     * <p>
-     * Here would also be where one could override
-     * {@code onQueueChanged(List<MediaSessionCompat.QueueItem> queue)} to get informed when items
-     * are added or removed from the queue. We don't do this here in order to keep the UI
-     * simple.
-     */
-
-    private class MediaBrowserListener extends MediaControllerCompat.Callback {
-        @Override
-        public void onPlaybackStateChanged(PlaybackStateCompat playbackState) {
-            isPlaying = playbackState != null &&
-                    playbackState.getState() == PlaybackStateCompat.STATE_PLAYING;
-            playStopButton.setPressed(isPlaying);
-        }
-
-        @Override
-        public void onMetadataChanged(MediaMetadataCompat mediaMetadata) {
-            if (mediaMetadata == null) {
-                return;
-            }
-            mTitleTextView.setText(
-                    mediaMetadata.getString(MediaMetadataCompat.METADATA_KEY_TITLE));
-            mArtistTextView.setText(
-                    mediaMetadata.getString(MediaMetadataCompat.METADATA_KEY_ARTIST));
-            mAlbumArt.setImageBitmap(MusicLibrary.getAlbumBitmap(
-                    LivePlayer.this,
-                    mediaMetadata.getString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID)));
-        }
-
-        @Override
-        public void onSessionDestroyed() {
-            super.onSessionDestroyed();
-        }
-
-        @Override
-        public void onQueueChanged(List<MediaSessionCompat.QueueItem> queue) {
-            super.onQueueChanged(queue);
-        }
-    }
 }
+
