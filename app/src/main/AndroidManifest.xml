@@ -47,6 +47,8 @@
                 android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
         </activity>
 
+        <activity android:name=".FirebaseAuthChecker"/>
+
         <activity
             android:name=".Schedule"
             android:label="@string/title_activity_schedule"
@@ -113,7 +115,7 @@
         <activity android:name=".uwavechat.MessageAdapter" />
         <activity
             android:name=".uwavechat.Guest"
-            android:label="Guest View (Temp layout)"
+            android:label="UWave Chats"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         <meta-data

@@ -4,6 +4,7 @@ import com.example.leonardgomez.uwavefinal.livestream.*;
 import com.example.leonardgomez.uwavefinal.serviceforms.*;
 import com.example.leonardgomez.uwavefinal.uwavechat.*;
 import com.example.leonardgomez.uwavefinal.archive.*;
+import com.firebase.client.Firebase;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     public void playAsync(View view) {
-        player.playAsync("https://live.uwave.fm:8443/listen-128.ogg");
+        //player.playAsync("https://live.uwave.fm:8443/listen-128.ogg");
+        player.playAsync("https://uwave.fm/listen/128.ogg");
     }
 
     public void stop(View view) {
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             Intent activity_home = new Intent(this, MainActivity.class);
             startActivity(activity_home);
         } else if (id == R.id.nav_chat) {
-            Intent activity_chat = new Intent(this, Login.class); //changed from login to users.
+            Intent activity_chat = new Intent(this, FirebaseAuthChecker.class);
             startActivity(activity_chat);
         } else if (id == R.id.nav_archive) {
             Intent activity_archive = new Intent(this, Forum.class);
