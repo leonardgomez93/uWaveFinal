@@ -20,7 +20,7 @@ public class CalendarEvents {
         String s = "";
         for(int i = 0; i < ce.size(); i++) {
             CalendarEvent temp = ce.get(i);
-            s = s + temp.getSummary() + " " + temp.getDescription() + " " + temp.getDtStart() + " " + temp.getDtEnd() + "\n" + "\n";
+            s = s + temp.getSummary() + " " + temp.getDescription() + " " + temp.getYearStart() + " " + temp.getYearEnd() + "\n" + "\n";
         }
         Schedule.data.setText(s);
     }

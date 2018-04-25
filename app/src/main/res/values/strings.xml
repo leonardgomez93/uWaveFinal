@@ -22,4 +22,12 @@ Business is in charge of the little details: underwriting content, legal inquiri
     <string name="schedule_text">"Schedule Coming Soon!"</string>
     <string name="stream_button">"Live Stream Button"</string>
 <string name="API_KEY">AIzaSyBY_4H7JlaFciTsgnVDbRHEp_KGoVMbHLY</string>
+
+    <string name="action_today">Today</string>
+    <string name="action_day_view">Day view</string>
+    <string name="action_three_day_view">3 day view</string>
+    <string name="action_week_view">Week view</string>
+    <string name="title_activity_basic">Basic Example</string>
+    <string name="title_activity_asynchronous">Asynchronous Events</string>
+    <string name="async_error">Could not download events from the internet</string>
 </resources>

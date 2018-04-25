@@ -32,6 +32,7 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.he5ed.lib:volley:android-cts-5.1_r4'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.googlecode.json-simple:json-simple:1.1'
     compile 'com.google.android.gms:play-services-auth:11.8.0'
     compile 'pub.devrel:easypermissions:0.3.0'

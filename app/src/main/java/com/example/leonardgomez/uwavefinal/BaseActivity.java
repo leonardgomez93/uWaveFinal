@@ -1,8 +1,10 @@
 package com.example.leonardgomez.uwavefinal;
 
+/**
+ * Created by leonardgomez on 4/20/18.
+ */
 
 import android.graphics.RectF;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -11,9 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
@@ -21,29 +20,19 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-
-public class Schedule extends MainActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener{
-    public static TextView data;
-    public ProgressBar progressBar;
+/**
+ * This is a base activity which contains week view and all the codes necessary to initialize the
+ * week view.
+ * Created by Raquib-ul-Alam Kanak on 1/3/2014.
+ * Website: http://alamkanak.github.io
+ */
+public abstract class BaseActivity extends MainActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
@@ -54,24 +43,9 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
+        setContentView(R.layout.activity_base);
 
 
-        data = findViewById(R.id.stext);
-        //fetchData process = new fetchData();
-        //process.execute();
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
         // Get a reference for the week view in the layout.
         mWeekView = (WeekView) findViewById(R.id.weekView);
 
@@ -92,102 +66,20 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
         // the week view. This is optional.
         setupDateTimeInterpreter(false);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
-
-
-
-
-    class fetchData extends AsyncTask<Void, Integer, Void> {
-        String data = "";
-        String dataParsed = "";
-        String singleParsed = "";
-        String s = "";
-        CalendarEvents ces = new CalendarEvents();
-        int prog = 0;
-        int max = 0;
-
-        @Override
-        protected void onPreExecute()
-        {
-            progressBar = (ProgressBar) findViewById(R.id.progressBar);
-            progressBar.setVisibility(View.VISIBLE);
-
-        }
-
-
-        @Override
-        protected Void doInBackground(Void... values) {
-            try {
-                URL url = new URL("https://ical-to-json.herokuapp.com/convert.json?url=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Fical%2Fvfgkklo6vnqh4j7iu4b9ffqgvs%2540group.calendar.google.com%2Fpublic%2Fbasic.ics");
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line = "";
-                while (line != null) {
-                    line = bufferedReader.readLine();
-                    if (line != null) {
-                        data = data + line;
-                    }
-                }
-                try {
-                    JSONObject jObj = new JSONObject(data);
-                    JSONArray vCalendar = jObj.getJSONArray("vcalendar");
-                    JSONObject vCalendar2 = vCalendar.getJSONObject(0);
-                    JSONArray vEvent = vCalendar2.getJSONArray("vevent");
-
-                    JsonHelper jh = new JsonHelper();
-                    List jList = jh.toList(vEvent);
-                    max = jList.size();
-                    progressBar.setMax(max);
-                    for (Object jSon : jList) {
-                        prog  = prog + 1;
-                        progressBar.setProgress(prog, true);
-                        String temp = jSon.toString();
-                        String temp2[] = temp.split("\\}\\,\\{");
-                        for (int i = 0; i < temp2.length; i++) {
-                            String s = temp2[i];
-                            s = s.replace("[", "");
-                            s = s.replace("]", "");
-                            s = s.replace("{", "");
-                            s = s.replace("}", "");
-                            s.trim();
-                            String[] parts = s.split("(?<!\\\\)(, )");
-                            Map<String, String> map = new HashMap<String, String>();
-                            for (int j = 0; j < parts.length; j++) {
-                                String parts2[] = parts[j].split("=");
-                                for (int k = 0; k < parts2.length - 1; k++) {
-                                    map.put(parts2[k], parts2[k + 1]);
-                                }
-                            }
-                            if (map.containsKey("summary") && map.containsKey("description") && map.containsKey("dtstart") & map.containsKey("dtend")) {
-                                CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"));
-                                CalendarEvents.addCalendarEvent(ceTemp);
-                            }
-                        }
-                    }
-                    prog = progressBar.getProgress();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            progressBar.setVisibility(View.INVISIBLE);
-            ces.printContents();
-            }
-        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -300,9 +192,3 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
         return mWeekView;
     }
 }
-
-
-
-
-
-
