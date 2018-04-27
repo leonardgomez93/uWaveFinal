@@ -39,24 +39,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        /*
-        findViewById(R.id.buttonBasic).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(MainActivity.this, BasicActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        findViewById(R.id.buttonAsynchronous).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AsynchronousActivity.class);
-                startActivity(intent);
-            }
-        });
-        */
 
     }
 

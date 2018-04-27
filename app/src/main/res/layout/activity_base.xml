@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:noOfVisibleDays="3"
         app:textSize="12sp"
-        app:todayBackgroundColor="#1848adff"
+        app:todayBackgroundColor="#e57076"
         app:todayHeaderTextColor="@color/accent" />
 
 </android.support.constraint.ConstraintLayout>
