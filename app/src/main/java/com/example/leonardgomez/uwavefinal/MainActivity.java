@@ -19,7 +19,7 @@ import android.view.View;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.widget.Toast;
 
-//Test
+//Merged to Master on 4/27. 
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
     private OggStreamPlayer player;
