@@ -4,6 +4,7 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekViewEvent;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * Website: http://alamkanak.github.io
  */
 public class BasicActivity extends BaseActivity implements MonthLoader.MonthChangeListener {
-    /*
+
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         // Populate the week view with some events.
@@ -118,12 +119,12 @@ public class BasicActivity extends BaseActivity implements MonthLoader.MonthChan
 
         return events;
     }
-    */
+    /*
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
         return events;
     }
-
+    */
 
 }
