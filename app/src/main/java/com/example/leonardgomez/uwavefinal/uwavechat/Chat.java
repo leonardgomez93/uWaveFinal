@@ -1,5 +1,6 @@
 package com.example.leonardgomez.uwavefinal.uwavechat;
 
+import com.example.leonardgomez.uwavefinal.MainActivity;
 import com.example.leonardgomez.uwavefinal.R;
 import com.example.leonardgomez.uwavefinal.uwavechat.*;
 
@@ -36,7 +37,7 @@ import java.util.Map;
 import static com.example.leonardgomez.uwavefinal.R.drawable.bubble_out;
 
 
-public class Chat extends AppCompatActivity {
+public class Chat extends MainActivity {
     LinearLayout layout;
     RelativeLayout layout_2;
     ImageView sendButton;
@@ -113,6 +114,18 @@ public class Chat extends AppCompatActivity {
 
             }
         });
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
