@@ -32,7 +32,8 @@ public class FirebaseAuthChecker extends AppCompatActivity {
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
-                            .setProviders(Arrays.asList(new           AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
+                            .setTheme(R.style.LoginTheme)
+                            .setProviders(Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
                             ))
                             .build(),
                     RC_SIGN_IN);
