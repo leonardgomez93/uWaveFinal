@@ -9,6 +9,7 @@
     </style>
 
     <!--Customizing the firebase ui theme -->
+
     <style name="LoginTheme" parent="FirebaseUI">
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
