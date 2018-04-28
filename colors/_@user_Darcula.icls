@@ -4,10 +4,18 @@
     <property name="created">2018-03-24T11:05:44</property>
     <property name="ide">AndroidStudio</property>
     <property name="ideVersion">3.0.1.0</property>
-    <property name="modified">2018-04-27T21:45:33</property>
+    <property name="modified">2018-04-28T02:06:24</property>
     <property name="originalScheme">Darcula</property>
   </metaInfo>
   <option name="EDITOR_FONT_SIZE" value="12" />
-  <option name="EDITOR_FONT_NAME" value="Source Code Pro" />
+  <option name="EDITOR_FONT_NAME" value="Monospaced" />
   <option name="CONSOLE_FONT_NAME" value="Monaco" />
+  <colors>
+    <option name="NOTIFICATION_BACKGROUND" value="" />
+  </colors>
+  <attributes>
+    <option name="DUPLICATE_FROM_SERVER">
+      <value />
+    </option>
+  </attributes>
 </scheme>
