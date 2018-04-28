@@ -33,7 +33,7 @@
         android:id="@+id/weekView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="54dp"
         app:columnGap="8dp"
         app:dayBackgroundColor="#05000000"
         app:eventTextColor="@android:color/white"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:noOfVisibleDays="3"
         app:textSize="12sp"
-        app:todayBackgroundColor="#e57076"
+        app:todayBackgroundColor="#d8d8d8"
         app:todayHeaderTextColor="@color/accent" />
     <TextView
         android:id="@+id/stext"

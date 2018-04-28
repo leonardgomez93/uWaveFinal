@@ -3,11 +3,11 @@
     <color name="colorText">#e72a32</color>
     <color name="colorPrimary">#413c3c</color>
     <color name="colorAccent">#706767</color>
-    <color name="event_color_01">#59dbe0</color>
-    <color name="event_color_02">#f57f68</color>
-    <color name="event_color_03">#87d288</color>
-    <color name="event_color_04">#f8b552</color>
+    <color name="event_color_01">#3d3d3d</color>
+    <color name="event_color_02">#b02e0c</color>
+    <color name="event_color_03">#3d3d3d</color>
+    <color name="event_color_04">#b02e0c</color>
     <color name="toolbar">#efefef</color>
     <color name="toolbar_text">#8f000000</color>
-    <color name="accent">#bd1929</color>
+    <color name="accent">#e72a32</color>
 </resources>
