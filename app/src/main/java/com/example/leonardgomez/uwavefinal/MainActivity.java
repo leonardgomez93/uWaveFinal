@@ -4,6 +4,8 @@ import com.example.leonardgomez.uwavefinal.livestream.*;
 import com.example.leonardgomez.uwavefinal.serviceforms.*;
 import com.example.leonardgomez.uwavefinal.uwavechat.*;
 import com.example.leonardgomez.uwavefinal.archive.*;
+import com.example.leonardgomez.uwavefinal.schedule.*;
+
 import com.firebase.client.Firebase;
 
 import android.content.Intent;
