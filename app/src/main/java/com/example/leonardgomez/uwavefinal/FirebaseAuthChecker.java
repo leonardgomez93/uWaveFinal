@@ -29,6 +29,7 @@ public class FirebaseAuthChecker extends AppCompatActivity {
             finish();
         } else {
             // not signed in
+            //Updated the color theme in '.setTheme' to grey instead of blue
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
