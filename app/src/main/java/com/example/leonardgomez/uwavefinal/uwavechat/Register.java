@@ -27,8 +27,8 @@ import org.json.JSONObject;
 public class Register extends AppCompatActivity {
     EditText username, password;
     Button registerButton;
-    String user, pass;
     TextView login;
+    String user, pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +56,15 @@ public class Register extends AppCompatActivity {
                 pass = password.getText().toString();
 
                 if (user.equals("")) {
-                    username.setError("can't be blank");
+                    username.setError("Field can't be blank.");
                 } else if (pass.equals("")) {
-                    password.setError("can't be blank");
+                    password.setError("Field can't be blank.");
                 } else if (!user.matches("[A-Za-z0-9]+")) {
-                    username.setError("only alphabet or number allowed");
+                    username.setError("Only alphabet and/or number allowed.");
                 } else if (user.length() < 5) {
-                    username.setError("at least 5 characters long");
+                    username.setError("Username needs to be at least 5 characters long.");
                 } else if (pass.length() < 5) {
-                    password.setError("at least 5 characters long");
+                    password.setError("Password needs to be at least 5 characters long.");
                 } else {
                     final ProgressDialog pd = new ProgressDialog(Register.this);
                     pd.setMessage("Loading...");
@@ -79,16 +79,16 @@ public class Register extends AppCompatActivity {
 
                             if (s.equals("null")) {
                                 reference.child(user).child("password").setValue(pass);
-                                Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Register.this, "Registration successful!", Toast.LENGTH_LONG).show();
                             } else {
                                 try {
                                     JSONObject obj = new JSONObject(s);
 
                                     if (!obj.has(user)) {
                                         reference.child(user).child("password").setValue(pass);
-                                        Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Register.this, "Registration successful!", Toast.LENGTH_LONG).show();
                                     } else {
-                                        Toast.makeText(Register.this, "username already exists", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Register.this, "Username already exists.", Toast.LENGTH_LONG).show();
                                     }
 
                                 } catch (JSONException e) {

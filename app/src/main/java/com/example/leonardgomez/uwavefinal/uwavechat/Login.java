@@ -44,10 +44,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
-    TextView registerUser, guestUser;
+    Button registerButton, loginButton;
+    TextView guestUser;
     EditText username;
     EditText password;
-    Button loginButton;
     String user;
     String pass;
 
@@ -55,14 +55,13 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         guestUser = (TextView) findViewById(R.id.guest_user);
-        registerUser = (TextView) findViewById(R.id.register);
+        loginButton = (Button) findViewById(R.id.loginButton);
+        registerButton = (Button) findViewById(R.id.registerButton);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
-        loginButton = (Button) findViewById(R.id.loginButton);
 
-        registerUser.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, Register.class));
@@ -83,9 +82,9 @@ public class Login extends AppCompatActivity {
                 pass = password.getText().toString();
 
                 if (user.equals("")) {
-                    username.setError("can't be blank");
+                    username.setError("Field can't be blank.");
                 } else if (pass.equals("")) {
-                    password.setError("can't be blank");
+                    password.setError("Field can't be blank.");
                 } else {
                     String url = "https://uwave-198615.firebaseio.com/users.json";
                     /*originally user.json*/
@@ -98,13 +97,13 @@ public class Login extends AppCompatActivity {
                         public void onResponse(String s) {
 
                             if (s.equals("null")) {
-                                Toast.makeText(Login.this, "user not found", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Login.this, "User not found.", Toast.LENGTH_LONG).show();
                             } else {
 
                                 try {
                                     JSONObject obj = new JSONObject(s);
                                     if (!obj.has(user)) {
-                                        Toast.makeText(Login.this, "user not found", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Login.this, "User not found.", Toast.LENGTH_LONG).show();
 
                                     }
                                     else if (obj.getJSONObject(user).getString("password").equals(pass)) {
@@ -112,10 +111,12 @@ public class Login extends AppCompatActivity {
                                         UserDetails.username = user;
                                         UserDetails.password = pass;
                                         startActivity(new Intent(Login.this, Users.class));
+                                        Toast.makeText(Login.this,"Login successful! Welcome back, " + UserDetails.username + "!",Toast.LENGTH_LONG).show();
+
 
                                     }
                                     else {
-                                        Toast.makeText(Login.this, "incorrect password", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Login.this, "Incorrect password.", Toast.LENGTH_LONG).show();
                                     }
                                 }
 

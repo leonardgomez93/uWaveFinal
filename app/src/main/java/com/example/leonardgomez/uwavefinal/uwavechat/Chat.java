@@ -61,8 +61,8 @@ public class Chat extends MainActivity {
         Firebase.setAndroidContext(this);
 
         //Refers to firebase's chat storage
-        reference1 = new Firebase("https://uwave-198615.firebaseio.com/chats/" + UserDetails.username + "_" + UserDetails.chatWith);
-        reference2 = new Firebase("https://uwave-198615.firebaseio.com/chats/" + UserDetails.chatWith + "_" + UserDetails.username);
+        reference1 = new Firebase("https://uwave-198615.firebaseio.com/chats/" + UserDetails.username + " " + UserDetails.chatWith);
+        reference2 = new Firebase("https://uwave-198615.firebaseio.com/chats/" + UserDetails.chatWith + " " + UserDetails.username);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override

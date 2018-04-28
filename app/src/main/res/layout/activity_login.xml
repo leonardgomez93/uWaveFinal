@@ -21,7 +21,7 @@
         android:gravity="center"
         android:text="UWave Chat Login"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColorLink="@android:color/background_dark"
+        android:textColor="@color/colorPrimary"
         android:textSize="30dp" />
 
     <EditText
@@ -46,23 +46,22 @@
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="18dp"
         android:text="Login" />
 
-    <TextView
-        android:id="@+id/register"
+    <Button
+        android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Register to chat"
-        android:textSize="18sp" />
+        android:text="Not a member? Join now"/>
 
     <TextView
         android:id="@+id/guest_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="View chats"
-        android:textSize="18sp" />
+        android:text="Enter our chat rooms as a guest"
+        android:textSize="16dp"/>
 
 </LinearLayout>
