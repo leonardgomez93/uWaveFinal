@@ -134,7 +134,7 @@
 
         <activity
             android:name=".uwavechat.Users"
-            android:label="Users Online">
+            android:label="Available Users">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
@@ -150,9 +150,8 @@
 
         <activity
             android:name=".uwavechat.Guest"
-            android:label="UWave Chat"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="Guest View"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
@@ -162,7 +161,7 @@
 
         <activity
             android:name=".archive.MixCloud"
-            android:label="Archived Shows"
+            android:label="Archive"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -171,7 +170,7 @@
 
         <activity
             android:name=".archive.Forum"
-            android:label="@string/title_activity_forum"
+            android:label="@string/title_activity_archive"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
