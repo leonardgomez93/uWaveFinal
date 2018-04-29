@@ -44,22 +44,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
-    Button registerButton, loginButton;
-    TextView guestUser;
     EditText username;
     EditText password;
+    Button loginButton, registerButton;
     String user;
     String pass;
+    TextView guestUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         guestUser = (TextView) findViewById(R.id.guest_user);
-        loginButton = (Button) findViewById(R.id.loginButton);
         registerButton = (Button) findViewById(R.id.registerButton);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+        loginButton = (Button) findViewById(R.id.loginButton);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,12 +112,12 @@ public class Login extends AppCompatActivity {
                                         UserDetails.username = user;
                                         UserDetails.password = pass;
                                         startActivity(new Intent(Login.this, Users.class));
-                                        Toast.makeText(Login.this,"Login successful! Welcome back, " + UserDetails.username + "!",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Login.this,"Welcome back, " + UserDetails.username + "!",Toast.LENGTH_LONG).show();
 
 
                                     }
                                     else {
-                                        Toast.makeText(Login.this, "Incorrect password.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Login.this, "incorrect password", Toast.LENGTH_LONG).show();
                                     }
                                 }
 
