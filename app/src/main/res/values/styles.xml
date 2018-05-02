@@ -13,6 +13,8 @@
     <style name="LoginTheme" parent="FirebaseUI">
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

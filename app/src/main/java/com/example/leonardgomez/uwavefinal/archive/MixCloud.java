@@ -35,7 +35,7 @@ public class MixCloud extends MainActivity{
         WebSettings webSettings = mixCloud.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        mixCloud.loadUrl("https://www.mixcloud.com/discover/uwave-radio/?order=latest");
+        mixCloud.loadUrl("file:///android_asset/uwave_archive2.html");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

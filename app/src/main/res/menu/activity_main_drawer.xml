@@ -20,19 +20,23 @@
             android:id="@+id/nav_archive"
             android:icon="@drawable/ic_people_black_24dp"
             android:title="@string/title_activity_archive" />
+
+        <item android:id="@+id/nav_forum"
+              android:icon="@drawable/ic_people_black_24dp"
+              android:title="Forum" />
         <item
             android:id="@+id/nav_psa_form"
             android:icon="@drawable/ic_menu_send"
-            android:title="Submit a PSA" />
+            android:title="PSAs" />
         <item
             android:id="@+id/nav_radio_app_form"
             android:icon="@drawable/ic_menu_send"
-            android:title="Host a Talk Show"/>
+            android:title="Host a Show"/>
 
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_black_24dp"
-            android:title="About Us" />
+            android:title="About us" />
     </group>
 
 </menu>
