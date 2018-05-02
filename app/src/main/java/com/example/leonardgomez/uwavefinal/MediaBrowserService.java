@@ -82,6 +82,10 @@ public class MediaBrowserService extends MediaBrowserServiceCompat {
                                                  }
                                              }
                 );
+                mStateBuilder.setActions(PlaybackStateCompat.ACTION_STOP);
+                mStateBuilder.setState(PlaybackStateCompat.STATE_PLAYING,
+                        player.getCurrentPosition(), 1.0f);
+                mSession.setPlaybackState(mStateBuilder.build());
             }
         }
 
@@ -94,9 +98,12 @@ public class MediaBrowserService extends MediaBrowserServiceCompat {
             //release resources
             if(player != null) {
                 player.stop();
+                mStateBuilder.setActions(PlaybackStateCompat.ACTION_PLAY);
+                mStateBuilder.setState(PlaybackStateCompat.STATE_STOPPED,
+                        player.getCurrentPosition(), 1.0f);
+                mSession.setPlaybackState(mStateBuilder.build());
                 player.reset();
                 player.release();
-                player = null;
             }
         }
     };

@@ -96,7 +96,7 @@ public class LivePlayer extends MainActivity {
 
                     switch (state.getState()) {
                         case PlaybackStateCompat.STATE_PLAYING:
-                            playPause.setImageResource(R.drawable.pause_button);
+                            playPause.setImageResource(R.drawable.stop_button);
                             break;
                         case PlaybackStateCompat.STATE_STOPPED:
                             playPause.setImageResource(R.drawable.play_button);
