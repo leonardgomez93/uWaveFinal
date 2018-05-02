@@ -1,7 +1,5 @@
 package com.example.leonardgomez.uwavefinal.archive;
 
-import com.example.leonardgomez.uwavefinal.MainActivity;
-
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +11,8 @@ import android.webkit.WebSettings;
 import com.example.leonardgomez.uwavefinal.MainActivity;
 import com.example.leonardgomez.uwavefinal.R;
 
-//Forum class for mixcloud
+
+//Forum class using Twitter API
 
 public class Forum extends MainActivity {
     @Override
@@ -25,7 +24,8 @@ public class Forum extends MainActivity {
 
         WebSettings webSettings = psa.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        psa.loadUrl("file:///android_asset/uwave_archive2.html");
+        //psa.loadUrl("file:///android_asset/uwave_archive2.html");
+        psa.loadUrl("file:///android_asset/uwave_tweets.html");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity
             Intent activity_chat = new Intent(this, FirebaseAuthChecker.class);
             startActivity(activity_chat);
         } else if (id == R.id.nav_archive) {
+            Intent activity_archive = new Intent(this, MixCloud.class);
+            startActivity(activity_archive);
+        } else if (id == R.id.nav_forum) {
             Intent activity_archive = new Intent(this, Forum.class);
             startActivity(activity_archive);
         } else if (id == R.id.nav_schedule) {

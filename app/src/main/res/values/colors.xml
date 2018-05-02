@@ -2,6 +2,7 @@
 <resources>
     <color name="colorText">#e72a32</color>
     <color name="colorPrimary">#413c3c</color>
+    <color name="colorForum">#292f33</color>
     <color name="colorAccent">#706767</color>
     <color name="event_color_01">#3d3d3d</color>
     <color name="event_color_02">#b02e0c</color>
