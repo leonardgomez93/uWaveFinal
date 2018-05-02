@@ -15,6 +15,7 @@
 
 package com.example.leonardgomez.uwavefinal;
 
+import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.browse.MediaBrowser;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -45,83 +47,63 @@ import java.util.List;
 
 public class MediaBrowserService extends MediaBrowserServiceCompat {
 
-    private static final String MY_MEDIA_ROOT_ID = "media_root_id";
-    private static final String MY_EMPTY_MEDIA_ROOT_ID = "empty_root_id";
+    private static final String MEDIA_ID_EMPTY_ROOT = "__EMPTY_ROOT__";
     private static final String TAG = MediaBrowserService.class.getSimpleName();
 
-    private Context mContext;
-
+    private static MediaPlayer player;
     private MediaSessionCompat mSession;
+
     private MediaSessionCompat.Callback mCallback = new MediaSessionCompat.Callback() {
+
+        private AudioManager am;
+        private IntentFilter filter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+        private BroadcastReceiver mNoisyReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                onStop();
+            }
+        };
+
         @Override
         public void onPlay() {
             super.onPlay();
-            // Get the session's metadata
-            MediaControllerCompat controller = mSession.getController();
-            MediaMetadataCompat mediaMetadata = controller.getMetadata();
-            MediaDescriptionCompat description = mediaMetadata.getDescription();
+            registerReceiver(mNoisyReceiver, filter);
 
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
+            am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            int result = am.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
-            builder
-                    // Add the metadata for the currently playing track
-                    .setContentTitle(description.getTitle())
-                    .setContentText(description.getSubtitle())
-                    .setSubText(description.getDescription())
-                    .setLargeIcon(description.getIconBitmap())
-
-                    // Enable launching the player by clicking the notification
-                    .setContentIntent(controller.getSessionActivity())
-
-                    // Stop the service when the notification is swiped away
-                    .setDeleteIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(mContext,
-                            PlaybackStateCompat.ACTION_STOP))
-
-                    // Make the transport controls visible on the lock screen
-                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-
-                    // Add an app icon and set its accent color
-                    // Be careful about the color
-                    .setSmallIcon(R.drawable.ic_launcher)
-                    .setColor(ContextCompat.getColor(mContext, R.color.colorPrimaryDark))
-
-                    // Take advantage of MediaStyle features
-                    .setStyle(new android.support.v4.media.app.NotificationCompat.MediaStyle()
-                            .setMediaSession(mSession.getSessionToken())
-                            .setShowActionsInCompactView(0)
-
-                            // Add a cancel button
-                            .setShowCancelButton(true)
-                            .setCancelButtonIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(mContext,
-                                    PlaybackStateCompat.ACTION_STOP)));
-
-// Display the notification and place the service in the foreground
-            startForeground(1, builder.build());
+            if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                player.prepareAsync();
+                mSession.setActive(true);
+                player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                                 @Override
+                                                 public void onPrepared(MediaPlayer mp) {
+                                                     player.start();
+                                                 }
+                                             }
+                );
+            }
         }
 
         @Override
         public void onStop() {
             super.onStop();
+            mSession.setActive(false);
+            am.abandonAudioFocus(afChangeListener);
+
+            //release resources
+            if(player != null) {
+                player.stop();
+                player.reset();
+                player.release();
+                player = null;
+            }
         }
     };
     private PlaybackStateCompat.Builder mStateBuilder;
     private MediaMetadataCompat.Builder mMetaDataBuilder;
     private AudioManager.OnAudioFocusChangeListener afChangeListener;
-    private IntentFilter intentFilter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
-    private BecomingNoisyReceiver noisyReceiver = new BecomingNoisyReceiver();
-    private android.service.media.MediaBrowserService service;
 
-    private boolean mServiceInStartedState;
-
-    private class BecomingNoisyReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(intent.getAction())) {
-                // Pause the playback
-
-            }
-        }
-    }
 
     @Override
     public void onCreate() {
@@ -133,7 +115,6 @@ public class MediaBrowserService extends MediaBrowserServiceCompat {
         //Enables callbacks from MediaButtons and TransportControls
         mSession.setFlags(
                 MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
-                        MediaSessionCompat.FLAG_HANDLES_QUEUE_COMMANDS |
                         MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
 
         // Set an initial PlaybackState with ACTION_PLAY, so media buttons can start the player
@@ -151,7 +132,7 @@ public class MediaBrowserService extends MediaBrowserServiceCompat {
 
         //Creating and initializing player
         String uWave = "https://uwave.fm/listen/128.ogg";
-        MediaPlayer player = new MediaPlayer();
+        player = new MediaPlayer();
         try {
             player.setAudioStreamType(AudioManager.STREAM_MUSIC);
             player.setDataSource(uWave);
@@ -161,21 +142,6 @@ public class MediaBrowserService extends MediaBrowserServiceCompat {
             e.printStackTrace();
             throw new Error("Failed.");
         }
-        //MediaBrowser
-        service = new android.service.media.MediaBrowserService() {
-            @Nullable
-            @Override
-            public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
-                return null;
-            }
-
-            @Override
-            public void onLoadChildren(@NonNull String parentId, @NonNull Result<List<MediaBrowser.MediaItem>> result) {
-
-            }
-        };
-
-        mContext = this;
     }
 
     @Override
@@ -194,116 +160,12 @@ public class MediaBrowserService extends MediaBrowserServiceCompat {
     public BrowserRoot onGetRoot(@NonNull String clientPackageName,
                                  int clientUid,
                                  Bundle rootHints) {
-        return new BrowserRoot(MusicLibrary.getRoot(), null);
+        return new BrowserRoot(MEDIA_ID_EMPTY_ROOT, null);
     }
 
     @Override
     public void onLoadChildren(
             @NonNull final String parentMediaId,
             @NonNull final Result<List<MediaBrowserCompat.MediaItem>> result) {
-
-        //  Browsing not allowed
-        if (TextUtils.equals(MY_EMPTY_MEDIA_ROOT_ID, parentMediaId)) {
-            result.sendResult(null);
-            return;
-        }
-
-        // Assume for example that the music catalog is already loaded/cached.
-
-        List<MediaBrowserCompat.MediaItem> mediaItems = new ArrayList<>();
-
-        // Check if this is the root menu:
-        if (MY_MEDIA_ROOT_ID.equals(parentMediaId)) {
-            // Build the MediaItem objects for the top level,
-            // and put them in the mediaItems list...
-        } else {
-            // Examine the passed parentMediaId to see which submenu we're at,
-            // and put the children of that menu in the mediaItems list...
-        }
-        result.sendResult(mediaItems);
     }
-
-    // MediaSession Callback: Transport Controls -> MediaPlayerAdapter
-    /*
-    public class MediaSessionCallback extends MediaSessionCompat.Callback {
-        private final List<MediaSessionCompat.QueueItem> mPlaylist = new ArrayList<>();
-        private int mQueueIndex = -1;
-        private MediaMetadataCompat mPreparedMedia;
-
-        @Override
-        public void onAddQueueItem(MediaDescriptionCompat description) {
-            mPlaylist.add(new MediaSessionCompat.QueueItem(description, description.hashCode()));
-            mQueueIndex = (mQueueIndex == -1) ? 0 : mQueueIndex;
-            mSession.setQueue(mPlaylist);
-        }
-
-        @Override
-        public void onRemoveQueueItem(MediaDescriptionCompat description) {
-            mPlaylist.remove(new MediaSessionCompat.QueueItem(description, description.hashCode()));
-            mQueueIndex = (mPlaylist.isEmpty()) ? -1 : mQueueIndex;
-            mSession.setQueue(mPlaylist);
-        }
-
-        @Override
-        public void onPrepare() {
-            if (mQueueIndex < 0 && mPlaylist.isEmpty()) {
-                // Nothing to play.
-                return;
-            }
-
-            final String mediaId = mPlaylist.get(mQueueIndex).getDescription().getMediaId();
-            mPreparedMedia = MusicLibrary.getMetadata(MediaBrowserService.this, mediaId);
-            mSession.setMetadata(mPreparedMedia);
-
-            if (!mSession.isActive()) {
-                mSession.setActive(true);
-            }
-        }
-
-        @Override
-        public void onPlay() {
-            if (!isReadyToPlay()) {
-                // Nothing to play.
-                return;
-            }
-
-            if (mPreparedMedia == null) {
-                onPrepare();
-            }
-
-            Log.d(TAG, "onPlayFromMediaId: MediaSession active");
-        }
-
-        @Override
-        public void onPause() {
-        }
-
-        @Override
-        public void onStop() {
-            mSession.setActive(false);
-        }
-
-        @Override
-        public void onSkipToNext() {
-            mQueueIndex = (++mQueueIndex % mPlaylist.size());
-            mPreparedMedia = null;
-            onPlay();
-        }
-
-        @Override
-        public void onSkipToPrevious() {
-            mQueueIndex = mQueueIndex > 0 ? mQueueIndex - 1 : mPlaylist.size() - 1;
-            mPreparedMedia = null;
-            onPlay();
-        }
-
-        @Override
-        public void onSeekTo(long pos) {
-        }
-
-        private boolean isReadyToPlay() {
-            return (!mPlaylist.isEmpty());
-        }
-    }
-    */
 }

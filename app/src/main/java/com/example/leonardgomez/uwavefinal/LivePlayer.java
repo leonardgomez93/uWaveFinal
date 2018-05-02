@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.v4.media.MediaBrowserCompat;
+import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -32,12 +33,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import static android.media.MediaMetadata.METADATA_KEY_ALBUM;
+import static android.media.MediaMetadata.METADATA_KEY_ALBUM_ART_URI;
+import static android.media.MediaMetadata.METADATA_KEY_ARTIST;
+import static android.media.MediaMetadata.METADATA_KEY_TITLE;
+
 public class LivePlayer extends MainActivity {
 
     private ImageView mAlbumArt;
     private TextView mTitleTextView;
     private TextView mArtistTextView;
-    private ImageButton playStopButton;
+    private ImageButton playPause;
 
     private MediaBrowserCompat mMediaBrowser;
 
@@ -50,18 +56,17 @@ public class LivePlayer extends MainActivity {
             // Get the token for the MediaSession
             MediaSessionCompat.Token token = mMediaBrowser.getSessionToken();
 
-            // Create a MediaControllerCompat
-            MediaControllerCompat mediaController;
             try {
-                mediaController =
+                // Create a MediaControllerCompat
+                MediaControllerCompat mediaController =
                         new MediaControllerCompat(LivePlayer.this, // Context
                                 token);
-            } catch(RemoteException e) {
+
+                // Save the controller
+                MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
+            } catch (RemoteException e) {
                 e.printStackTrace();
             }
-
-            // Save the controller
-            MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
 
             // Finish building the UI
             buildTransportControls();
@@ -82,63 +87,46 @@ public class LivePlayer extends MainActivity {
             new MediaControllerCompat.Callback() {
                 @Override
                 public void onMetadataChanged(MediaMetadataCompat metadata) {
+
                 }
 
                 @Override
                 public void onPlaybackStateChanged(PlaybackStateCompat state) {
+                    super.onPlaybackStateChanged(state);
+
+                    switch (state.getState()) {
+                        case PlaybackStateCompat.STATE_PLAYING:
+                            playPause.setImageResource(R.drawable.pause_button);
+                            break;
+                        case PlaybackStateCompat.STATE_STOPPED:
+                            playPause.setImageResource(R.drawable.play_button);
+                            break;
+                    }
                 }
             };
-
-    void buildTransportControls() {
-        // Grab the view for the play/pause button
-        playStopButton = (ImageButton) findViewById(R.id.playButton);
-
-        // Attach a listener to the button
-        playStopButton.setOnClickListener(new View.OnClickListener() {
-                                              @Override
-                                              public void onClick(View v) {
-                                                  // Since this is a play/pause button, you'll need to test the current state
-                                                  // and choose the action accordingly
-
-                                                  int pbState = MediaControllerCompat.getMediaController(LivePlayer.this).getPlaybackState().getState();
-                                                  if (pbState == PlaybackStateCompat.STATE_PLAYING) {
-                                                      MediaControllerCompat.getMediaController(LivePlayer.this).getTransportControls().stop();
-                                                  } else {
-                                                      MediaControllerCompat.getMediaController(LivePlayer.this).getTransportControls().play();
-                                                  }
-                                              }
-                                          });
-
-        MediaControllerCompat mediaController = MediaControllerCompat.getMediaController(LivePlayer.this);
-
-        // Display the initial state
-        MediaMetadataCompat metadata = mediaController.getMetadata();
-        PlaybackStateCompat pbState = mediaController.getPlaybackState();
-
-        // Register a Callback to stay in sync
-        mediaController.registerCallback(controllerCallback);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_player);
 
+        playPause = findViewById(R.id.playButton);
+
         //Create MediaBrowserServiceCompat
         mMediaBrowser = new MediaBrowserCompat(this, new ComponentName(this, MediaBrowserService.class), mConnectionCallbacks,
                 null);
 
         // Construct menu
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         fetchSongData song = new fetchSongData();
@@ -160,6 +148,37 @@ public class LivePlayer extends MainActivity {
         }
         mMediaBrowser.disconnect();
 
+    }
+
+
+    void buildTransportControls() {
+        // Grab the view for the play/pause button
+        ImageButton playStopButton = findViewById(R.id.playButton);
+
+        // Attach a listener to the button
+        playStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Since this is a play/pause button, you'll need to test the current state
+                // and choose the action accordingly
+
+                int pbState = MediaControllerCompat.getMediaController(LivePlayer.this).getPlaybackState().getState();
+                if (pbState == PlaybackStateCompat.STATE_PLAYING) {
+                    MediaControllerCompat.getMediaController(LivePlayer.this).getTransportControls().stop();
+                } else {
+                    MediaControllerCompat.getMediaController(LivePlayer.this).getTransportControls().play();
+                }
+            }
+        });
+
+        MediaControllerCompat mediaController = MediaControllerCompat.getMediaController(LivePlayer.this);
+
+        // Display the initial state
+        MediaMetadataCompat metadata = mediaController.getMetadata();
+        PlaybackStateCompat pbState = mediaController.getPlaybackState();
+
+        // Register a Callback to stay in sync
+        mediaController.registerCallback(controllerCallback);
     }
 
     class fetchSongData extends AsyncTask<Void, Void, Void> {
@@ -198,7 +217,9 @@ public class LivePlayer extends MainActivity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-                throw new Error("Failed.");
+                artistAndAlbum = "**Could not connect to UWave Server at this time**";
+                //playPause.setVisibility(View.GONE);
+                //throw new Error("Failed.");
             }
             return null;
         }
