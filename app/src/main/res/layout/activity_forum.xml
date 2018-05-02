@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorForum"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -18,7 +18,7 @@
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <include layout="@layout/content_archive" />
+    <include layout="@layout/content_forum" />
 
 
     <android.support.design.widget.NavigationView

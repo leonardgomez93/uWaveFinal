@@ -9,7 +9,6 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE"/>
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -150,8 +149,9 @@
 
         <activity
             android:name=".uwavechat.Guest"
-            android:label="Guest View"
-            android:parentActivityName=".MainActivity">
+            android:label="UWave Chat"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
@@ -170,7 +170,7 @@
 
         <activity
             android:name=".archive.Forum"
-            android:label="@string/title_activity_archive"
+            android:label="Forum"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
