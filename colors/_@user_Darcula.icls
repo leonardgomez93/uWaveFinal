@@ -4,7 +4,7 @@
     <property name="created">2018-03-24T11:05:44</property>
     <property name="ide">AndroidStudio</property>
     <property name="ideVersion">3.0.1.0</property>
-    <property name="modified">2018-04-28T02:06:24</property>
+    <property name="modified">2018-05-02T20:41:20</property>
     <property name="originalScheme">Darcula</property>
   </metaInfo>
   <option name="EDITOR_FONT_SIZE" value="12" />
@@ -14,6 +14,9 @@
     <option name="NOTIFICATION_BACKGROUND" value="" />
   </colors>
   <attributes>
+    <option name="BOOKMARKS_ATTRIBUTES">
+      <value />
+    </option>
     <option name="DUPLICATE_FROM_SERVER">
       <value />
     </option>
