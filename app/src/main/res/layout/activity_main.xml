@@ -20,7 +20,7 @@
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
             android:adjustViewBounds="true"
-            app:srcCompat="@mipmap/swoosh_square_small" />
+            app:srcCompat="@mipmap/swoosh_square" />
     </LinearLayout>
 
     <include
