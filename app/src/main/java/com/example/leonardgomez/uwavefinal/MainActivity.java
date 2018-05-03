@@ -1,6 +1,5 @@
 package com.example.leonardgomez.uwavefinal;
 
-import com.example.leonardgomez.uwavefinal.livestream.*;
 import com.example.leonardgomez.uwavefinal.serviceforms.*;
 import com.example.leonardgomez.uwavefinal.uwavechat.*;
 import com.example.leonardgomez.uwavefinal.archive.*;
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity
             Intent activity_home = new Intent(this, MainActivity.class);
             startActivity(activity_home);
         } else if (id == R.id.nav_chat) {
-            Intent activity_chat = new Intent(this, FirebaseAuthChecker.class);
+            Intent activity_chat = new Intent(this, Login.class);
             startActivity(activity_chat);
         } else if (id == R.id.nav_archive) {
             Intent activity_archive = new Intent(this, MixCloud.class);
