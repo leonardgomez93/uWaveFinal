@@ -36,13 +36,12 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fetchData process = new fetchData();
-        process.execute();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,16 +53,19 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //fetchData process = new fetchData();
+        //process.execute();
     }
-//aaaa
+
     class fetchData extends AsyncTask<Void, Integer, Void> {
         String data = "";
         String dataParsed = "";
         String singleParsed = "";
         String s = "";
-        CalendarEvents ces = new CalendarEvents();
+        public CalendarEvents ces = new CalendarEvents();
         int prog = 0;
         int max = 0;
+        public ProgressBar progressBar;
 
         @Override
         protected void onPreExecute()
@@ -72,7 +74,6 @@ public class MainActivity extends AppCompatActivity
             progressBar.setVisibility(View.VISIBLE);
 
         }
-
 
         @Override
         protected Void doInBackground(Void... values) {
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity
                             }
                             if (map.containsKey("summary") && map.containsKey("description") && map.containsKey("dtstart") & map.containsKey("dtend")) {
                                 CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"));
-                                CalendarEvents.addCalendarEvent(ceTemp);
+                                ces.addCalendarEvent(ceTemp);
                             }
                         }
                     }
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             progressBar.setVisibility(View.INVISIBLE);
-            ces.printContents();
+            //ces.printContents();
         }
     }
 

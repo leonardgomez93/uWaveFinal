@@ -16,20 +16,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="54dp" />
 
-    <!--
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="387px"
-            android:layout_height="189px"
-            android:indeterminate="true"
-            android:indeterminateDrawable="@drawable/run_animation"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline2">
-
-        </ProgressBar>
-        -->
         <com.alamkanak.weekview.WeekView
             android:id="@+id/weekView"
             android:layout_width="match_parent"
