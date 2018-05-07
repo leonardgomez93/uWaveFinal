@@ -5,33 +5,44 @@ import com.example.leonardgomez.uwavefinal.uwavechat.*;
 import com.example.leonardgomez.uwavefinal.archive.*;
 import com.example.leonardgomez.uwavefinal.schedule.*;
 
-import com.firebase.client.Firebase;
-
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
-import android.widget.Toast;
+import android.widget.ProgressBar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        fetchData process = new fetchData();
+        process.execute();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,6 +55,95 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+//aaaa
+    class fetchData extends AsyncTask<Void, Integer, Void> {
+        String data = "";
+        String dataParsed = "";
+        String singleParsed = "";
+        String s = "";
+        CalendarEvents ces = new CalendarEvents();
+        int prog = 0;
+        int max = 0;
+
+        @Override
+        protected void onPreExecute()
+        {
+            progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+            progressBar.setVisibility(View.VISIBLE);
+
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... values) {
+            try {
+                URL url = new URL("https://ical-to-json.herokuapp.com/convert.json?url=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Fical%2Fvfgkklo6vnqh4j7iu4b9ffqgvs%2540group.calendar.google.com%2Fpublic%2Fbasic.ics");
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+                while (line != null) {
+                    line = bufferedReader.readLine();
+                    if (line != null) {
+                        data = data + line;
+                    }
+                }
+                try {
+                    JSONObject jObj = new JSONObject(data);
+                    JSONArray vCalendar = jObj.getJSONArray("vcalendar");
+                    JSONObject vCalendar2 = vCalendar.getJSONObject(0);
+                    JSONArray vEvent = vCalendar2.getJSONArray("vevent");
+
+                    JsonHelper jh = new JsonHelper();
+                    List jList = jh.toList(vEvent);
+                    max = jList.size();
+                    progressBar.setMax(max);
+                    for (Object jSon : jList) {
+                        prog  = prog + 1;
+                        progressBar.setProgress(prog, true);
+                        String temp = jSon.toString();
+                        String temp2[] = temp.split("\\}\\,\\{");
+                        for (int i = 0; i < temp2.length; i++) {
+                            String s = temp2[i];
+                            s = s.replace("[", "");
+                            s = s.replace("]", "");
+                            s = s.replace("{", "");
+                            s = s.replace("}", "");
+                            s.trim();
+                            String[] parts = s.split("(?<!\\\\)(, )");
+                            Map<String, String> map = new HashMap<String, String>();
+                            for (int j = 0; j < parts.length; j++) {
+                                String parts2[] = parts[j].split("=");
+                                for (int k = 0; k < parts2.length - 1; k++) {
+                                    map.put(parts2[k], parts2[k + 1]);
+                                }
+                            }
+                            if (map.containsKey("summary") && map.containsKey("description") && map.containsKey("dtstart") & map.containsKey("dtend")) {
+                                CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"));
+                                CalendarEvents.addCalendarEvent(ceTemp);
+                            }
+                        }
+                    }
+                    prog = progressBar.getProgress();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            progressBar.setVisibility(View.INVISIBLE);
+            ces.printContents();
+        }
+    }
+
 
     public void openLivePlayer(View view) {
         Intent activity_live = new Intent(this, LivePlayer.class);
@@ -69,14 +169,14 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             Intent activity_home = new Intent(this, MainActivity.class);
             startActivity(activity_home);
-        } else if (id == R.id.nav_chat) {
-            Intent activity_chat = new Intent(this, Login.class);
+        } else if (id == R.id.nav_forum) {
+            Intent activity_chat = new Intent(this, Announcements.class);
             startActivity(activity_chat);
         } else if (id == R.id.nav_archive) {
             Intent activity_archive = new Intent(this, MixCloud.class);
             startActivity(activity_archive);
-        } else if (id == R.id.nav_forum) {
-            Intent activity_archive = new Intent(this, Forum.class);
+        } else if (id == R.id.nav_chat) {
+            Intent activity_archive = new Intent(this, Login.class);
             startActivity(activity_archive);
         } else if (id == R.id.nav_schedule) {
             Intent activity_schedule = new Intent(this, Schedule.class);

@@ -9,4 +9,26 @@
     tools:context="com.example.leonardgomez.uwavefinal.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="54dp" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:layout_width="387px"
+        android:layout_height="189px"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/run_animation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline3">
+
+    </ProgressBar>
+
+
 </android.support.constraint.ConstraintLayout>

@@ -12,9 +12,9 @@ import com.example.leonardgomez.uwavefinal.MainActivity;
 import com.example.leonardgomez.uwavefinal.R;
 
 
-//Forum class using Twitter API
+//Announcements class using Twitter API
 
-public class Forum extends MainActivity {
+public class Announcements extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
