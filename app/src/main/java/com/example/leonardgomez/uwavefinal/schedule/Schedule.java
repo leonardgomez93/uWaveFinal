@@ -43,7 +43,7 @@ import java.util.Map;
 
 
 public class Schedule extends MainActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener{
-    public static TextView data;
+
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
@@ -56,7 +56,7 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
-        data = findViewById(R.id.stext);
+
         //fetchData process = new fetchData();
         //process.execute();
 
