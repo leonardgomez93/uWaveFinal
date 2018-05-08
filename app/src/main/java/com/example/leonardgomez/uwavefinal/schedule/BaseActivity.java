@@ -34,7 +34,7 @@ import java.util.Locale;
  * Created by Raquib-ul-Alam Kanak on 1/3/2014.
  * Website: http://alamkanak.github.io
  */
-public abstract class BaseActivity extends MainActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
+public class BaseActivity extends MainActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
@@ -184,11 +184,14 @@ public abstract class BaseActivity extends MainActivity implements WeekView.Even
     public void onEmptyViewLongPress(Calendar time) {
         Toast.makeText(this, "Empty view long pressed: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
     }
-    @Override
-    public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-        List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
-        return events;
-    }
+
+
+
+        @Override
+        public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
+            List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
+            return events;
+        }
 
     public WeekView getWeekView() {
         return mWeekView;

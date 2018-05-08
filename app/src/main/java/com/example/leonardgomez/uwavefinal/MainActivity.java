@@ -1,5 +1,7 @@
 package com.example.leonardgomez.uwavefinal;
 
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.example.leonardgomez.uwavefinal.serviceforms.*;
 import com.example.leonardgomez.uwavefinal.uwavechat.*;
 import com.example.leonardgomez.uwavefinal.archive.*;
@@ -36,34 +38,29 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public ProgressBar progressBar;
+    public static TextView data;
+    public ImageView imgView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imgView = (ImageView)findViewById(R.id.liveButton);
+        imgView .setVisibility(View.INVISIBLE);
+        data = findViewById(R.id.stext);
+
         fetchData process = new fetchData();
         process.execute();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
-//aaaa
+
     class fetchData extends AsyncTask<Void, Integer, Void> {
         String data = "";
         String dataParsed = "";
         String singleParsed = "";
         String s = "";
-        CalendarEvents ces = new CalendarEvents();
+        public CalendarEvents ces = new CalendarEvents();
         int prog = 0;
         int max = 0;
+        public ProgressBar progressBar;
 
         @Override
         protected void onPreExecute()
@@ -72,7 +69,6 @@ public class MainActivity extends AppCompatActivity
             progressBar.setVisibility(View.VISIBLE);
 
         }
-
 
         @Override
         protected Void doInBackground(Void... values) {
@@ -120,7 +116,7 @@ public class MainActivity extends AppCompatActivity
                             }
                             if (map.containsKey("summary") && map.containsKey("description") && map.containsKey("dtstart") & map.containsKey("dtend")) {
                                 CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"));
-                                CalendarEvents.addCalendarEvent(ceTemp);
+                                ces.addCalendarEvent(ceTemp);
                             }
                         }
                     }
@@ -141,6 +137,18 @@ public class MainActivity extends AppCompatActivity
             super.onPostExecute(aVoid);
             progressBar.setVisibility(View.INVISIBLE);
             ces.printContents();
+            imgView .setVisibility(View.VISIBLE);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    MainActivity.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(MainActivity.this);
         }
     }
 

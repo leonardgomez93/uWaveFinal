@@ -1,5 +1,7 @@
 package com.example.leonardgomez.uwavefinal.schedule;
 
+import com.example.leonardgomez.uwavefinal.MainActivity;
+
 import java.util.ArrayList;
 
 /**
@@ -22,7 +24,7 @@ public class CalendarEvents {
             CalendarEvent temp = ce.get(i);
             s = s + temp.getSummary() + " " + temp.getDescription() + " " + temp.getYearStart() + " " + temp.getYearEnd() + "\n" + "\n";
         }
-        Schedule.data.setText(s);
+        MainActivity.data.setText(s);
     }
 
 
