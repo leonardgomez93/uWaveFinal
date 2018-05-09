@@ -96,7 +96,7 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
             event.setColor(getResources().getColor(R.color.event_color_01));
             events.add(event);
         }
-//llavefdbhjg
+//llavefdbhjgvwe
         for(int i = 3; i < ces.getSize() - 2; i++)  {
 
                 startTime = Calendar.getInstance();
