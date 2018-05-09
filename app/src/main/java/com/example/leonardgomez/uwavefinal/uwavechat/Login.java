@@ -56,7 +56,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        guestUser = (TextView) findViewById(R.id.guest_user);
         registerButton = (Button) findViewById(R.id.registerButton);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
@@ -66,13 +65,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, Register.class));
-            }
-        });
-
-        guestUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Login.this, Guest.class));
             }
         });
 
