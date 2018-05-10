@@ -27,7 +27,6 @@ public class MixCloud extends MainActivity{
         setContentView(R.layout.activity_archive);
 
         WebView mixCloud = (WebView) findViewById(R.id.webview);
-
         WebSettings webSettings = mixCloud.getSettings();
         webSettings.setJavaScriptEnabled(true);
 

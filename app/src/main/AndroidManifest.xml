@@ -49,8 +49,6 @@
                 android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
         </activity>
 
-        <activity android:name=".FirebaseAuthChecker"/>
-
         <activity
             android:name=".schedule.BasicActivity"
             android:label="title_activity_basic"
