@@ -1,7 +1,6 @@
 package com.example.leonardgomez.uwavefinal.schedule;
 
 import android.graphics.RectF;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -10,9 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
@@ -22,27 +18,14 @@ import com.alamkanak.weekview.WeekViewEvent;
 import com.example.leonardgomez.uwavefinal.MainActivity;
 import com.example.leonardgomez.uwavefinal.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 
-public class Schedule extends MainActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener{
+public class Schedule extends MainActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
 
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
@@ -56,29 +39,11 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
-
-        //fetchData process = new fetchData();
-        //process.execute();
-
-
-        // Get a reference for the week view in the layout.
         mWeekView = (WeekView) findViewById(R.id.weekView);
-
-        // Show a toast message about the touched event.
         mWeekView.setOnEventClickListener(this);
-
-        // The week view has infinite scrolling horizontally. We have to provide the events of a
-        // month every time the month changes on the week view.
         mWeekView.setMonthChangeListener(this);
-
-        // Set long press listener for events.
         mWeekView.setEventLongPressListener(this);
-
-        // Set long press listener for empty view
         mWeekView.setEmptyViewLongPressListener(this);
-
-        // Set up a date time interpreter to interpret how the date and time will be formatted in
-        // the week view. This is optional.
         setupDateTimeInterpreter(false);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -100,17 +65,56 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
+
         Calendar startTime = Calendar.getInstance();
-        startTime.set(Calendar.HOUR_OF_DAY, 2);
-        startTime.set(Calendar.MINUTE, 0);
-        startTime.set(Calendar.MONTH, newMonth-1);
-        startTime.set(Calendar.YEAR, newYear);
         Calendar endTime = (Calendar) startTime.clone();
-        endTime.add(Calendar.HOUR, 1);
-        endTime.set(Calendar.MONTH, newMonth-1);
-        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
-        event.setColor(getResources().getColor(R.color.event_color_01));
-        events.add(event);
+        WeekViewEvent event = new WeekViewEvent(0 + 1, ces.getAtIndex(0).getSummary(), startTime, endTime);
+        startTime.set(Calendar.DATE, Integer.parseInt(ces.getAtIndex(0).getDayStart()));
+        if(startTime.get(Calendar.MONTH) == newMonth) {
+            startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(0).getTimeStartHour()));
+            startTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(0).getTimeStartMin()));
+            startTime.set(Calendar.MONTH, Integer.parseInt(ces.getAtIndex(0).getMonthStart()) - 1);
+            startTime.set(Calendar.YEAR, Integer.parseInt(ces.getAtIndex(0).getYearStart()));
+            endTime = (Calendar) startTime.clone();
+            endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(0).getTimeEndHour()));
+            endTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(0).getTimeEndMin()));
+            event = new WeekViewEvent(0 + 1, ces.getAtIndex(0).getSummary(), startTime, endTime);
+            event.setColor(getResources().getColor(R.color.event_color_01));
+            events.add(event);
+        }
+        startTime = Calendar.getInstance();
+        startTime.set(Calendar.DATE, Integer.parseInt(ces.getAtIndex(2).getDayStart()));
+        if(startTime.get(Calendar.MONTH) == newMonth) {
+            startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(2).getTimeStartHour()));
+            startTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(2).getTimeStartMin()));
+            startTime.set(Calendar.MONTH, Integer.parseInt(ces.getAtIndex(2).getMonthStart()) - 1);
+            startTime.set(Calendar.YEAR, Integer.parseInt(ces.getAtIndex(2).getYearStart()));
+            endTime = (Calendar) startTime.clone();
+            endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(2).getTimeEndHour()));
+            endTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(2).getTimeEndMin()));
+            event = new WeekViewEvent(0 + 2, ces.getAtIndex(2).getSummary(), startTime, endTime);
+            event.setColor(getResources().getColor(R.color.event_color_01));
+            events.add(event);
+        }
+//llavefdbhjgvwe
+        for(int i = 3; i < ces.getSize() - 2; i++)  {
+
+                startTime = Calendar.getInstance();
+                startTime.set(Calendar.DATE, Integer.parseInt(ces.getAtIndex(i + 1).getDayStart()));
+                startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(i + 1).getTimeStartHour()));
+                startTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(i + 1).getTimeStartMin()));
+                startTime.set(Calendar.MONTH, Integer.parseInt(ces.getAtIndex(i + 1).getMonthStart()) - 1);
+        //if(startTime.get(Calendar.MONTH) != newMonth) {
+                startTime.set(Calendar.YEAR, Integer.parseInt(ces.getAtIndex(i + 1).getYearStart()));
+                endTime = (Calendar) startTime.clone();
+                endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(i + 1).getTimeEndHour()));
+                endTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(i + 1).getTimeEndMin()));
+                event = new WeekViewEvent(i + 2, ces.getAtIndex(i + 1).getSummary(), startTime, endTime);
+                event.setColor(getResources().getColor(R.color.event_color_02));
+                events.add(event);
+            //}
+        }
+
 
         startTime = Calendar.getInstance();
         startTime.set(Calendar.HOUR_OF_DAY, 3);
@@ -152,7 +156,7 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
         startTime = Calendar.getInstance();
         startTime.set(Calendar.HOUR_OF_DAY, 5);
         startTime.set(Calendar.MINUTE, 0);
-        startTime.set(Calendar.MONTH, newMonth-1);
+        startTime.set(Calendar.MONTH, newMonth - 1);
         startTime.set(Calendar.YEAR, newYear);
         startTime.add(Calendar.DATE, 1);
         endTime = (Calendar) startTime.clone();
@@ -197,6 +201,8 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
         event = new WeekViewEvent(5, getEventTitle(startTime), startTime, endTime);
         event.setColor(getResources().getColor(R.color.event_color_02));
         events.add(event);
+
+
 
         return events;
     }

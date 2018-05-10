@@ -44,10 +44,16 @@ public class CalendarEvent {
     public String getDayEnd() {
         return dtEnd.substring(6,8);
     }
-    public String getTimeStart() {
-        return dtStart.substring(9,15);
+    public String getTimeStartHour() {
+        return dtStart.substring(9,11);
     }
-    public String getTimeEnd() {
-        return dtEnd.substring(9,15);
+    public String getTimeStartMin() {
+        return dtStart.substring(11,13);
+    }
+    public String getTimeEndHour() {
+        return dtEnd.substring(9,11);
+    }
+    public String getTimeEndMin() {
+        return dtEnd.substring(11,13);
     }
 }

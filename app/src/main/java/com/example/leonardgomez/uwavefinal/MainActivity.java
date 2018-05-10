@@ -1,16 +1,8 @@
 package com.example.leonardgomez.uwavefinal;
 
-import android.widget.ImageView;
-import android.widget.TextView;
-import com.example.leonardgomez.uwavefinal.serviceforms.*;
-import com.example.leonardgomez.uwavefinal.uwavechat.*;
-import com.example.leonardgomez.uwavefinal.archive.*;
-import com.example.leonardgomez.uwavefinal.schedule.*;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,7 +10,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.example.leonardgomez.uwavefinal.archive.Announcements;
+import com.example.leonardgomez.uwavefinal.archive.MixCloud;
+import com.example.leonardgomez.uwavefinal.schedule.CalendarEvent;
+import com.example.leonardgomez.uwavefinal.schedule.CalendarEvents;
+import com.example.leonardgomez.uwavefinal.schedule.JsonHelper;
+import com.example.leonardgomez.uwavefinal.schedule.Schedule;
+import com.example.leonardgomez.uwavefinal.serviceforms.PsaApplicationForm;
+import com.example.leonardgomez.uwavefinal.serviceforms.RadioApplicationForm;
+import com.example.leonardgomez.uwavefinal.uwavechat.Login;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity
 
     public static TextView data;
     public ImageView imgView;
+    public CalendarEvents ces = new CalendarEvents();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         String dataParsed = "";
         String singleParsed = "";
         String s = "";
-        public CalendarEvents ces = new CalendarEvents();
+
         int prog = 0;
         int max = 0;
         public ProgressBar progressBar;
@@ -171,7 +177,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle navigation view item clicks here.avs
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
