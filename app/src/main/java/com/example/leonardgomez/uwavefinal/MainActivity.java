@@ -5,25 +5,16 @@ import com.example.leonardgomez.uwavefinal.uwavechat.*;
 import com.example.leonardgomez.uwavefinal.archive.*;
 import com.example.leonardgomez.uwavefinal.schedule.*;
 
-import com.firebase.client.Firebase;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -69,17 +60,17 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             Intent activity_home = new Intent(this, MainActivity.class);
             startActivity(activity_home);
+        } else if (id == R.id.nav_announcements) {
+            Intent activity_announcements = new Intent(this, Announcements.class);
+            startActivity(activity_announcements);
         } else if (id == R.id.nav_chat) {
-            Intent activity_chat = new Intent(this, Users.class);
-            startActivity(activity_chat);
-        } else if (id == R.id.nav_archive) {
-            Intent activity_archive = new Intent(this, MixCloud.class);
-            startActivity(activity_archive);
-        } else if (id == R.id.nav_forum) {
-            Intent activity_archive = new Intent(this, Forum.class);
-            startActivity(activity_archive);
+            Intent activity_login_ = new Intent(this, Login.class);
+            startActivity(activity_login_);
         } else if (id == R.id.nav_schedule) {
             Intent activity_schedule = new Intent(this, Schedule.class);
+            startActivity(activity_schedule);
+        } else if (id == R.id.nav_archive) {
+            Intent activity_schedule = new Intent(this, MixCloud.class);
             startActivity(activity_schedule);
         } else if (id == R.id.nav_psa_form) {
             Intent activity_psa_form = new Intent(this, PsaApplicationForm.class);
