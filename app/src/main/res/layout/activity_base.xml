@@ -7,23 +7,23 @@
     android:background="#fff">
 
     <com.alamkanak.weekview.WeekView
-        android:id="@+id/weekView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
-        app:columnGap="8dp"
-        app:dayBackgroundColor="#05000000"
-        app:eventTextColor="@android:color/white"
-        app:headerColumnBackground="#ffffffff"
-        app:headerColumnPadding="8dp"
-        app:headerColumnTextColor="@color/toolbar_text"
-        app:headerRowBackgroundColor="@color/toolbar"
-        app:headerRowPadding="12dp"
-        app:hourHeight="60dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:noOfVisibleDays="3"
-        app:textSize="12sp"
-        app:todayBackgroundColor="#e57076"
-        app:todayHeaderTextColor="@color/accent" />
+            android:id="@+id/weekView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            app:columnGap="8dp"
+            app:dayBackgroundColor="#05000000"
+            app:eventTextColor="@android:color/white"
+            app:headerColumnBackground="#ffffffff"
+            app:headerColumnPadding="8dp"
+            app:headerColumnTextColor="@color/toolbar_text"
+            app:headerRowBackgroundColor="@color/toolbar"
+            app:headerRowPadding="12dp"
+            app:hourHeight="60dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:noOfVisibleDays="3"
+            app:textSize="12sp"
+            app:todayBackgroundColor="#e57076"
+            app:todayHeaderTextColor="@color/accent" />
 
 </android.support.constraint.ConstraintLayout>

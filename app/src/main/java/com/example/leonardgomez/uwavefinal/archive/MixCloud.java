@@ -26,17 +26,17 @@ public class MixCloud extends MainActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
 
-        //Intent intent = new Intent(Intent.ACTION_VIEW);
-        //intent.setData(Uri.parse("https://www.mixcloud.com/discover/uwave-radio/?order=latest"));
-        //startActivity(intent);
+        /*Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://www.mixcloud.com/profile/content"));
+        intent.setPackage("com.mixcloud.player");
+        this.startActivity(intent);*/
 
-        WebView mixCloud = (WebView) findViewById(R.id.webview);
+        WebView psa = (WebView) findViewById(R.id.webview);
 
-        WebSettings webSettings = mixCloud.getSettings();
+        WebSettings webSettings = psa.getSettings();
         webSettings.setJavaScriptEnabled(true);
-
-        mixCloud.loadUrl("file:///android_asset/uwave_archive2.html");
-
+        //psa.loadUrl("file:///android_asset/uwave_archive2.html");
+        psa.loadUrl("file:///android_asset/uwave_archive2.html");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

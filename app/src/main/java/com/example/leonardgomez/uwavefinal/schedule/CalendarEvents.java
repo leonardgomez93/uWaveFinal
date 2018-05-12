@@ -1,5 +1,7 @@
 package com.example.leonardgomez.uwavefinal.schedule;
 
+import com.example.leonardgomez.uwavefinal.MainActivity;
+
 import java.util.ArrayList;
 
 /**
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 
 public class CalendarEvents {
     private static ArrayList<CalendarEvent> ce = new ArrayList<>();
+    private static ArrayList<CalendarEvent> ce2 = new ArrayList<>();
 
     public CalendarEvents() {
 
@@ -17,13 +20,26 @@ public class CalendarEvents {
     }
 
     public void printContents() {
-        String s = "";
+        String s = ce.size() + "";
+        String s2 = "";
         for(int i = 0; i < ce.size(); i++) {
             CalendarEvent temp = ce.get(i);
-            s = s + temp.getSummary() + " " + temp.getDescription() + " " + temp.getYearStart() + " " + temp.getYearEnd() + "\n" + "\n";
+            //s = s + temp.getSummary() + " " + temp.getDescription() + " " + temp.getTimeStartHour() + " " + temp.getTimeEndHour() + " " + temp.getMonthStart() + " " + temp.getDayStart() + " " + temp.getYearStart() + "\n" + "\n";
+            int t = Integer.parseInt(temp.getYearStart());
+            if (t >= 2017) {
+                ce2.add(temp);
+            }
+
         }
-        Schedule.data.setText(s);
+        s2 = ce2.size() + "";
+        MainActivity.data.setText(s + "  " +s2);
+    }
+    public CalendarEvent getAtIndex(int index) {
+        return ce.get(index);
     }
 
+    public int getSize() {
+        return ce.size();
+    }
 
 }

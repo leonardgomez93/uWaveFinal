@@ -1,5 +1,11 @@
 <application>
+  <component name="CodeFoldingSettings">
+    <option name="COLLAPSE_DOC_COMMENTS" value="true" />
+  </component>
   <component name="CodeInsightSettings">
     <option name="HIGHLIGHT_BRACES" value="false" />
+  </component>
+  <component name="XmlFoldingSettings">
+    <option name="COLLAPSE_ENTITIES" value="false" />
   </component>
 </application>

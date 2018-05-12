@@ -1,7 +1,5 @@
 package com.example.leonardgomez.uwavefinal.schedule;
 
-import com.example.leonardgomez.uwavefinal.schedule.*;
-
 import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.example.leonardgomez.uwavefinal.R;
@@ -15,24 +13,58 @@ import java.util.List;
  * Created by Raquib-ul-Alam Kanak on 1/3/2014.
  * Website: http://alamkanak.github.io
  */
-public class BasicActivity extends BaseActivity implements MonthLoader.MonthChangeListener {
+public class BasicActivity extends Schedule implements MonthLoader.MonthChangeListener {
+
 
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-        // Populate the week view with some events.
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
+
         Calendar startTime = Calendar.getInstance();
-        startTime.set(Calendar.HOUR_OF_DAY, 3);
-        startTime.set(Calendar.MINUTE, 0);
-        startTime.set(Calendar.MONTH, newMonth-1);
-        startTime.set(Calendar.YEAR, newYear);
+        startTime = Calendar.getInstance();
+        startTime.set(Calendar.DATE, Integer.parseInt(ces.getAtIndex(0).getDayStart()));
+        startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(0).getTimeStartHour()));
+        startTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(0).getTimeStartMin()));
+        startTime.set(Calendar.MONTH, Integer.parseInt(ces.getAtIndex(0).getMonthStart()) - 1);
+        startTime.set(Calendar.YEAR, Integer.parseInt(ces.getAtIndex(0).getYearStart()));
         Calendar endTime = (Calendar) startTime.clone();
-        endTime.add(Calendar.HOUR, 1);
-        endTime.set(Calendar.MONTH, newMonth-1);
-        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
+        endTime = (Calendar) startTime.clone();
+        endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(0).getTimeEndHour()));
+        endTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(0).getTimeEndMin()));
+        WeekViewEvent event = new WeekViewEvent(0 + 1, ces.getAtIndex(0).getSummary(), startTime, endTime);
         event.setColor(getResources().getColor(R.color.event_color_01));
         events.add(event);
+
+        startTime = Calendar.getInstance();
+        startTime.set(Calendar.DATE, Integer.parseInt(ces.getAtIndex(2).getDayStart()));
+        startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(2).getTimeStartHour()));
+        startTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(2).getTimeStartMin()));
+        startTime.set(Calendar.MONTH, Integer.parseInt(ces.getAtIndex(2).getMonthStart()) - 1);
+        startTime.set(Calendar.YEAR, Integer.parseInt(ces.getAtIndex(2).getYearStart()));
+        endTime = (Calendar) startTime.clone();
+        endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(2).getTimeEndHour()));
+        endTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(2).getTimeEndMin()));
+        event = new WeekViewEvent(0 + 2, ces.getAtIndex(2).getSummary(), startTime, endTime);
+        event.setColor(getResources().getColor(R.color.event_color_01));
+        events.add(event);
+
+        for(int i = 0; i < ces.getSize() - 2; i++)  {
+            startTime = Calendar.getInstance();
+            startTime.set(Calendar.DATE, Integer.parseInt(ces.getAtIndex(i + 1).getDayStart()));
+            startTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(i + 1).getTimeStartHour()));
+            startTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(i + 1).getTimeStartMin()));
+            startTime.set(Calendar.MONTH, Integer.parseInt(ces.getAtIndex(i + 1).getMonthStart()) - 1);
+            startTime.set(Calendar.YEAR, Integer.parseInt(ces.getAtIndex(i + 1).getYearStart()));
+            endTime = (Calendar) startTime.clone();
+            endTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(ces.getAtIndex(i + 1).getTimeEndHour()));
+            endTime.set(Calendar.MINUTE, Integer.parseInt(ces.getAtIndex(i + 1).getTimeEndMin()));
+            event = new WeekViewEvent(i + 2, ces.getAtIndex(i + 1).getSummary(), startTime, endTime);
+            event.setColor(getResources().getColor(R.color.event_color_02));
+            events.add(event);
+
+        }
+
 
         startTime = Calendar.getInstance();
         startTime.set(Calendar.HOUR_OF_DAY, 3);
@@ -74,7 +106,7 @@ public class BasicActivity extends BaseActivity implements MonthLoader.MonthChan
         startTime = Calendar.getInstance();
         startTime.set(Calendar.HOUR_OF_DAY, 5);
         startTime.set(Calendar.MINUTE, 0);
-        startTime.set(Calendar.MONTH, newMonth-1);
+        startTime.set(Calendar.MONTH, newMonth - 1);
         startTime.set(Calendar.YEAR, newYear);
         startTime.add(Calendar.DATE, 1);
         endTime = (Calendar) startTime.clone();
@@ -122,12 +154,5 @@ public class BasicActivity extends BaseActivity implements MonthLoader.MonthChan
 
         return events;
     }
-    /*
-    @Override
-    public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-        List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
-        return events;
-    }
-    */
 
 }

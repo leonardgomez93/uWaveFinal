@@ -171,8 +171,8 @@
         </activity>
 
         <activity
-            android:name=".archive.Forum"
-            android:label="Forum"
+            android:name=".archive.Announcements"
+            android:label="Announcements"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
