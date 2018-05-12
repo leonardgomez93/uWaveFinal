@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.leonardgomez.uwavemaster"
+        applicationId "com.example.leonardgomez.uwavefinal"
         minSdkVersion 24
-        targetSdkVersion 27
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -27,7 +28,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:27.1.0'
+    compile 'com.android.support:appcompat-v7:26.0.2'
     compile 'com.github.bumptech.glide:glide:4.3.1'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.google.gdata:core:1.47.1'
@@ -37,10 +38,8 @@ dependencies {
     compile 'com.googlecode.json-simple:json-simple:1.1'
 
 
-    implementation 'com.android.support:design:27.1.0'
+    implementation 'com.android.support:design:26.0.2'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support:design:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     //Firebase libraries
@@ -49,7 +48,7 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:11.8.0'
     compile 'com.firebaseui:firebase-ui-auth:3.2.2'
     compile 'com.firebase:firebase-client-android:2.5.2+'
-    compile 'com.android.volley:volley:1.0.0'
+    //compile 'com.android.volley:volley:1.0.0'
     compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-database:11.8.0'
     compile 'com.google.firebase:firebase-storage:11.8.0'
@@ -58,7 +57,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-appinvite:11.8.0'
     compile 'com.google.firebase:firebase-analytics:11.8.0'
     compile 'com.firebaseui:firebase-ui-database:3.1.0'
-    compile 'com.google.firebase:firebase-core:9.4.0'
 
     //Crash test for UWave's chat service
     compile 'com.crashlytics.sdk.android:crashlytics:2.7.1'
@@ -70,3 +68,4 @@ dependencies {
         exclude group: 'org.apache.httpcomponents'
     }*/
 }
+apply plugin: 'com.google.gms.google-services'
