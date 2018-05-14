@@ -10,14 +10,30 @@ public class CalendarEvent {
     private String description;
     private String dtStart;
     private String dtEnd;
+    private String freq;
+    private String byDay;
+    private String until = "";
 
 
-    public CalendarEvent(String summary, String description, String dtStart, String dtEnd) {
+    public CalendarEvent(String summary, String description, String dtStart, String dtEnd, String freq, String byDay) {
         this.summary = summary;
         this.description = description;
         this.dtStart = dtStart;
         this.dtEnd = dtEnd;
+        this.freq = freq;
+        this.byDay = byDay;
     }
+
+    public CalendarEvent(String summary, String description, String dtStart, String dtEnd, String freq, String byDay, String until) {
+        this.summary = summary;
+        this.description = description;
+        this.dtStart = dtStart;
+        this.dtEnd = dtEnd;
+        this.freq = freq;
+        this.byDay = byDay;
+        this.until = until;
+    }
+
     public String getSummary() {
 
         return summary;
@@ -56,4 +72,8 @@ public class CalendarEvent {
     public String getTimeEndMin() {
         return dtEnd.substring(11,13);
     }
+    public String getFreq() { return freq; }
+    public String getByday() { return byDay; }
+    public String getUntil() { return until; }
+    public String getRrule() { return freq + " " + byDay + " " + " " + until;}
 }
