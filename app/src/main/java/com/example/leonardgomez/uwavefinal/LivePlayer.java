@@ -1,26 +1,29 @@
 package com.example.leonardgomez.uwavefinal;
 
 import android.content.ComponentName;
-import android.media.AudioManager;
+import android.content.Context;
+import android.media.browse.MediaBrowser;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
-import android.support.design.widget.NavigationView;
+import android.support.annotation.NonNull;
 import android.support.v4.media.MediaBrowserCompat;
-import android.support.v4.media.MediaMetadataCompat;
+import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.session.MediaControllerCompat;
+import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.view.View;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ImageButton;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,55 +31,64 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
-public class LivePlayer extends  MainActivity {
+import static android.media.MediaMetadata.METADATA_KEY_ALBUM;
+import static android.media.MediaMetadata.METADATA_KEY_ALBUM_ART_URI;
+import static android.media.MediaMetadata.METADATA_KEY_ARTIST;
+import static android.media.MediaMetadata.METADATA_KEY_TITLE;
+
+public class LivePlayer extends MainActivity {
+
+    private ImageView mAlbumArt;
+    private TextView mTitleTextView;
+    private TextView mArtistTextView;
+    private ImageButton playPause;
+
     private MediaBrowserCompat mMediaBrowser;
-    private ImageButton mPlayPause;
 
-    private final MediaBrowserCompat.ConnectionCallback mConnectionCallbacks =
-            new MediaBrowserCompat.ConnectionCallback() {
-                @Override
-                public void onConnected() {
+    private boolean isPlaying;
 
-                    // Get the token for the MediaSession
-                    MediaSessionCompat.Token token = mMediaBrowser.getSessionToken();
+    private final MediaBrowserCompat.ConnectionCallback mConnectionCallbacks = new MediaBrowserCompat.ConnectionCallback() {
+        @Override
+        public void onConnected() {
 
-                    // Create a MediaControllerCompat
-                    try {
-                        // Create a MediaControllerCompat
-                        MediaControllerCompat mediaController =
-                                new MediaControllerCompat(LivePlayer.this, // Context
-                                        token);
+            // Get the token for the MediaSession
+            MediaSessionCompat.Token token = mMediaBrowser.getSessionToken();
 
-                        if(mediaController.getPlaybackState().getState() == PlaybackStateCompat.STATE_PLAYING) {
-                                mPlayPause.setImageResource(R.drawable.stop_button);
-                        }
+            try {
+                // Create a MediaControllerCompat
+                MediaControllerCompat mediaController =
+                        new MediaControllerCompat(LivePlayer.this, // Context
+                                token);
 
-                        // Save the controller
-                        MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
+                // Save the controller
+                MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
 
-                    // Finish building the UI
-                    buildTransportControls();
-                }
+            // Finish building the UI
+            buildTransportControls();
+        }
 
-                @Override
-                public void onConnectionSuspended() {
-                    // The Service has crashed. Disable transport controls until it automatically reconnects
-                }
+        @Override
+        public void onConnectionSuspended() {
+            // The Service has crashed. Disable transport controls until it automatically reconnects
+        }
 
-                @Override
-                public void onConnectionFailed() {
-                    // The Service has refused our connection
-                }
-            };
+        @Override
+        public void onConnectionFailed() {
+            // The Service has refused our connection
+        }
+    };
 
     MediaControllerCompat.Callback controllerCallback =
             new MediaControllerCompat.Callback() {
                 @Override
-                public void onMetadataChanged(MediaMetadataCompat metadata) {}
+                public void onMetadataChanged(MediaMetadataCompat metadata) {
+
+                }
 
                 @Override
                 public void onPlaybackStateChanged(PlaybackStateCompat state) {
@@ -84,10 +96,10 @@ public class LivePlayer extends  MainActivity {
 
                     switch (state.getState()) {
                         case PlaybackStateCompat.STATE_PLAYING:
-                            mPlayPause.setImageResource(R.drawable.stop_button);
+                            playPause.setImageResource(R.drawable.stop_button);
                             break;
                         case PlaybackStateCompat.STATE_STOPPED:
-                            mPlayPause.setImageResource(R.drawable.play_button);
+                            playPause.setImageResource(R.drawable.play_button);
                             break;
                     }
                 }
@@ -97,14 +109,12 @@ public class LivePlayer extends  MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_player);
-        // ...
-        // Create MediaBrowserServiceCompat
-        mMediaBrowser = new MediaBrowserCompat(this,
-                new ComponentName(this, MediaPlaybackService.class),
-                mConnectionCallbacks,
-                null); // optional Bundle
 
-        mPlayPause = findViewById(R.id.playButton);
+        playPause = findViewById(R.id.playButton);
+
+        //Create MediaBrowserServiceCompat
+        mMediaBrowser = new MediaBrowserCompat(this, new ComponentName(this, MediaBrowserService.class), mConnectionCallbacks,
+                null);
 
         // Construct menu
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -130,12 +140,6 @@ public class LivePlayer extends  MainActivity {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
         // (see "stay in sync with the MediaSession")
@@ -146,13 +150,13 @@ public class LivePlayer extends  MainActivity {
 
     }
 
-    void buildTransportControls()
-    {
+
+    void buildTransportControls() {
         // Grab the view for the play/pause button
-        mPlayPause = (ImageButton) findViewById(R.id.playButton);
+        ImageButton playStopButton = findViewById(R.id.playButton);
 
         // Attach a listener to the button
-        mPlayPause.setOnClickListener(new View.OnClickListener() {
+        playStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Since this is a play/pause button, you'll need to test the current state
@@ -228,3 +232,4 @@ public class LivePlayer extends  MainActivity {
         }
     }
 }
+
