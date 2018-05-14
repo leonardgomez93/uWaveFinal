@@ -113,7 +113,7 @@ public class LivePlayer extends MainActivity {
         playPause = findViewById(R.id.playButton);
 
         //Create MediaBrowserServiceCompat
-        mMediaBrowser = new MediaBrowserCompat(this, new ComponentName(this, MediaBrowserService.class), mConnectionCallbacks,
+        mMediaBrowser = new MediaBrowserCompat(this, new ComponentName(this, MediaPlaybackService.class), mConnectionCallbacks,
                 null);
 
         // Construct menu
