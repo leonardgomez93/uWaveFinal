@@ -57,10 +57,17 @@ public class MediaPlaybackService extends MediaBrowserServiceCompat {
                     if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
                         // start the player (asynchronously)
                         player.prepareAsync();
+                        mStateBuilder.setState(PlaybackStateCompat.STATE_BUFFERING, player.getCurrentPosition(), 1.0f);
+                        mSession.setPlaybackState(mStateBuilder.build());
+
                         player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                                                          @Override
                                                          public void onPrepared(MediaPlayer mp) {
                                                              player.start();
+                                                             mStateBuilder.setActions(PlaybackStateCompat.ACTION_STOP);
+                                                             mStateBuilder.setState(PlaybackStateCompat.STATE_PLAYING,
+                                                                     player.getCurrentPosition(), 1.0f);
+                                                             mSession.setPlaybackState(mStateBuilder.build());
                                                          }
                                                      }
                         );
@@ -72,10 +79,6 @@ public class MediaPlaybackService extends MediaBrowserServiceCompat {
                         // Register BECOME_NOISY BroadcastReceiver
                         registerReceiver(myNoisyAudioStreamReceiver, intentFilter);
 
-                        mStateBuilder.setActions(PlaybackStateCompat.ACTION_STOP);
-                        mStateBuilder.setState(PlaybackStateCompat.STATE_PLAYING,
-                                player.getCurrentPosition(), 1.0f);
-                        mSession.setPlaybackState(mStateBuilder.build());
                     }
                 }
 
