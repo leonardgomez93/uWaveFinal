@@ -1,8 +1,7 @@
 package com.example.leonardgomez.uwavefinal;
 
 import android.content.ComponentName;
-import android.content.Context;
-import android.media.browse.MediaBrowser;
+import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -62,11 +61,15 @@ public class LivePlayer extends MainActivity {
                         new MediaControllerCompat(LivePlayer.this, // Context
                                 token);
 
-                // Save the controller
-                MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+                        if(mediaController.getPlaybackState().getState() == (PlaybackStateCompat.STATE_PLAYING)) {
+                                playPause.setImageResource(R.drawable.stop_button);
+                        }
+
+                        // Save the controller
+                        MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
 
             // Finish building the UI
             buildTransportControls();
@@ -140,6 +143,12 @@ public class LivePlayer extends MainActivity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         // (see "stay in sync with the MediaSession")
@@ -153,10 +162,10 @@ public class LivePlayer extends MainActivity {
 
     void buildTransportControls() {
         // Grab the view for the play/pause button
-        ImageButton playStopButton = findViewById(R.id.playButton);
+        playPause = (ImageButton) findViewById(R.id.playButton);
 
         // Attach a listener to the button
-        playStopButton.setOnClickListener(new View.OnClickListener() {
+        playPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Since this is a play/pause button, you'll need to test the current state

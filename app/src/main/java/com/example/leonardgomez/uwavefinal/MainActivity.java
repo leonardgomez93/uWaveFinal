@@ -120,9 +120,14 @@ public class MainActivity extends AppCompatActivity
                                     map.put(parts2[k], parts2[k + 1]);
                                 }
                             }
-                            if (map.containsKey("summary") && map.containsKey("description") && map.containsKey("dtstart") & map.containsKey("dtend")) {
-                                CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"));
-                                ces.addCalendarEvent(ceTemp);
+                            if (map.containsKey("summary") && map.containsKey("description") && map.containsKey("dtstart") & map.containsKey("dtend") && map.containsKey("rrule")) {
+                                if(map.containsKey("until")) {
+                                    CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"), map.get("freq"), map.get("byday"), map.get("until"));
+                                    ces.addCalendarEvent(ceTemp);
+                                } else {
+                                    CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"), map.get("freq"), map.get("byday"));
+                                    ces.addCalendarEvent(ceTemp);
+                                }
                             }
                         }
                     }
@@ -141,8 +146,8 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            progressBar.setVisibility(View.INVISIBLE);
-            ces.printContents();
+            //progressBar.setVisibility(View.INVISIBLE);
+            //ces.printContents();
             imgView .setVisibility(View.VISIBLE);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
