@@ -1,12 +1,9 @@
 package com.example.leonardgomez.uwavefinal;
 
 import android.content.ComponentName;
-import android.content.Context;
-import android.media.browse.MediaBrowser;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.RemoteException;
+import android.content.Intent;
+import android.media.AudioManager;
+import android.os.*;
 import android.support.annotation.NonNull;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.MediaDescriptionCompat;
@@ -22,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -44,8 +42,15 @@ public class LivePlayer extends MainActivity {
     private TextView mTitleTextView;
     private TextView mArtistTextView;
     private ImageButton playPause;
+    private String temp = "";
+    TextView songName = (TextView) findViewById(R.id.songName);
+    TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
+    String song = "";
+    String artistAndAlbum = "";
+    String data = "";
 
     private MediaBrowserCompat mMediaBrowser;
+
 
     private boolean isPlaying;
 
@@ -62,11 +67,15 @@ public class LivePlayer extends MainActivity {
                         new MediaControllerCompat(LivePlayer.this, // Context
                                 token);
 
-                // Save the controller
-                MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+                        if(mediaController.getPlaybackState().getState() == (PlaybackStateCompat.STATE_PLAYING)) {
+                                playPause.setImageResource(R.drawable.stop_button);
+                        }
+
+                        // Save the controller
+                        MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
 
             // Finish building the UI
             buildTransportControls();
@@ -96,11 +105,14 @@ public class LivePlayer extends MainActivity {
 
                     switch (state.getState()) {
                         case PlaybackStateCompat.STATE_PLAYING:
+                            playPause.setVisibility(View.VISIBLE);
                             playPause.setImageResource(R.drawable.stop_button);
                             break;
                         case PlaybackStateCompat.STATE_STOPPED:
                             playPause.setImageResource(R.drawable.play_button);
                             break;
+                        case PlaybackStateCompat.STATE_BUFFERING:
+                            playPause.setVisibility(View.INVISIBLE);
                     }
                 }
             };
@@ -113,7 +125,7 @@ public class LivePlayer extends MainActivity {
         playPause = findViewById(R.id.playButton);
 
         //Create MediaBrowserServiceCompat
-        mMediaBrowser = new MediaBrowserCompat(this, new ComponentName(this, MediaBrowserService.class), mConnectionCallbacks,
+        mMediaBrowser = new MediaBrowserCompat(this, new ComponentName(this, MediaPlaybackService.class), mConnectionCallbacks,
                 null);
 
         // Construct menu
@@ -131,12 +143,40 @@ public class LivePlayer extends MainActivity {
 
         fetchSongData song = new fetchSongData();
         song.execute();
+
+
     }
+
 
     @Override
     public void onStart() {
         super.onStart();
         mMediaBrowser.connect();
+        new Thread(new Runnable(){
+            public void run() {
+                // TODO Auto-generated method stub
+                while(true)
+                {
+                    try {
+                        Thread.sleep(5000);
+                        fetchSongData song = new fetchSongData();
+                        song.execute();
+
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+        }).start();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
     }
 
     @Override
@@ -153,10 +193,10 @@ public class LivePlayer extends MainActivity {
 
     void buildTransportControls() {
         // Grab the view for the play/pause button
-        ImageButton playStopButton = findViewById(R.id.playButton);
+        playPause = (ImageButton) findViewById(R.id.playButton);
 
         // Attach a listener to the button
-        playStopButton.setOnClickListener(new View.OnClickListener() {
+        playPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Since this is a play/pause button, you'll need to test the current state
@@ -182,11 +222,6 @@ public class LivePlayer extends MainActivity {
     }
 
     class fetchSongData extends AsyncTask<Void, Void, Void> {
-        String data = "";
-        TextView songName = (TextView) findViewById(R.id.songName);
-        TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
-        String song = "";
-        String artistAndAlbum = "";
 
         @Override
         protected Void doInBackground(Void... voids) {

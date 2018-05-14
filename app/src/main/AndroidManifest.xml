@@ -14,7 +14,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/uwave_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -28,6 +28,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -92,10 +93,9 @@
                 android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
         </activity>
 
-
         <activity
             android:name=".serviceforms.RadioApplicationForm"
-            android:label="@string/title_activity_radio_app_form"
+            android:label="Host a Show"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -150,6 +150,15 @@
             android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".uwavechat.Guest"
+            android:label="Guest View"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
+        </activity>
+
         <activity android:name=".uwavechat.MessageAdapter" />
 
         <activity
@@ -178,7 +187,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
         </activity>
-        <service android:name=".MediaBrowserService">
+        <service android:name=".MediaPlaybackService">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
