@@ -1,11 +1,9 @@
 package com.example.leonardgomez.uwavefinal;
 
 import android.content.ComponentName;
+import android.content.Intent;
 import android.media.AudioManager;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.RemoteException;
+import android.os.*;
 import android.support.annotation.NonNull;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.MediaDescriptionCompat;
@@ -21,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -43,8 +42,15 @@ public class LivePlayer extends MainActivity {
     private TextView mTitleTextView;
     private TextView mArtistTextView;
     private ImageButton playPause;
+    private String temp = "";
+    TextView songName = (TextView) findViewById(R.id.songName);
+    TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
+    String song = "";
+    String artistAndAlbum = "";
+    String data = "";
 
     private MediaBrowserCompat mMediaBrowser;
+
 
     private boolean isPlaying;
 
@@ -137,12 +143,34 @@ public class LivePlayer extends MainActivity {
 
         fetchSongData song = new fetchSongData();
         song.execute();
+
+
     }
+
 
     @Override
     public void onStart() {
         super.onStart();
         mMediaBrowser.connect();
+        new Thread(new Runnable(){
+            public void run() {
+                // TODO Auto-generated method stub
+                while(true)
+                {
+                    try {
+                        Thread.sleep(5000);
+                        fetchSongData song = new fetchSongData();
+                        song.execute();
+
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+        }).start();
     }
 
     @Override
@@ -194,11 +222,6 @@ public class LivePlayer extends MainActivity {
     }
 
     class fetchSongData extends AsyncTask<Void, Void, Void> {
-        String data = "";
-        TextView songName = (TextView) findViewById(R.id.songName);
-        TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
-        String song = "";
-        String artistAndAlbum = "";
 
         @Override
         protected Void doInBackground(Void... voids) {
