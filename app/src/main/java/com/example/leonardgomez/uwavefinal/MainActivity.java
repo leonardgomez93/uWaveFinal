@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity
 
     public static TextView data;
     public ImageView imgView;
+    public CalendarEvents cesUntil = new CalendarEvents();
+    public CalendarEvents cesForever = new CalendarEvents();
     public CalendarEvents ces = new CalendarEvents();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,10 +124,12 @@ public class MainActivity extends AppCompatActivity
                             }
                             if (map.containsKey("summary") && map.containsKey("description") && map.containsKey("dtstart") & map.containsKey("dtend") && map.containsKey("rrule")) {
                                 if(map.containsKey("until")) {
-                                    CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"), map.get("freq"), map.get("byday"), map.get("until"));
+                                    CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"), map.get("until"));
+                                    cesUntil.addCalendarEvent(ceTemp);
                                     ces.addCalendarEvent(ceTemp);
                                 } else {
-                                    CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"), map.get("freq"), map.get("byday"));
+                                    CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"));
+                                    cesForever.addCalendarEvent(ceTemp);
                                     ces.addCalendarEvent(ceTemp);
                                 }
                             }

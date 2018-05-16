@@ -15,22 +15,18 @@ public class CalendarEvent {
     private String until = "";
 
 
-    public CalendarEvent(String summary, String description, String dtStart, String dtEnd, String freq, String byDay) {
+    public CalendarEvent(String summary, String description, String dtStart, String dtEnd) {
         this.summary = summary;
         this.description = description;
         this.dtStart = dtStart;
         this.dtEnd = dtEnd;
-        this.freq = freq;
-        this.byDay = byDay;
     }
 
-    public CalendarEvent(String summary, String description, String dtStart, String dtEnd, String freq, String byDay, String until) {
+    public CalendarEvent(String summary, String description, String dtStart, String dtEnd, String until) {
         this.summary = summary;
         this.description = description;
         this.dtStart = dtStart;
         this.dtEnd = dtEnd;
-        this.freq = freq;
-        this.byDay = byDay;
         this.until = until;
     }
 

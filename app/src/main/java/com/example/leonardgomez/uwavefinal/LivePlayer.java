@@ -1,27 +1,27 @@
 package com.example.leonardgomez.uwavefinal;
 
 import android.content.ComponentName;
-import android.content.Intent;
 import android.media.AudioManager;
-import android.os.*;
-import android.support.annotation.NonNull;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.RemoteException;
+import android.support.design.widget.NavigationView;
 import android.support.v4.media.MediaBrowserCompat;
-import android.support.v4.media.MediaDescriptionCompat;
-import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.MediaMetadataCompat;
+import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,12 +29,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-
-import static android.media.MediaMetadata.METADATA_KEY_ALBUM;
-import static android.media.MediaMetadata.METADATA_KEY_ALBUM_ART_URI;
-import static android.media.MediaMetadata.METADATA_KEY_ARTIST;
-import static android.media.MediaMetadata.METADATA_KEY_TITLE;
 
 public class LivePlayer extends MainActivity {
 
@@ -43,11 +37,11 @@ public class LivePlayer extends MainActivity {
     private TextView mArtistTextView;
     private ImageButton playPause;
     private String temp = "";
-    TextView songName = (TextView) findViewById(R.id.songName);
-    TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
-    String song = "";
-    String artistAndAlbum = "";
-    String data = "";
+    private TextView songName = (TextView) findViewById(R.id.songName);
+    private TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
+    public String song = "";
+    public String artistAndAlbum = "";
+    public String data = "";
 
     private MediaBrowserCompat mMediaBrowser;
 
@@ -79,6 +73,25 @@ public class LivePlayer extends MainActivity {
 
             // Finish building the UI
             buildTransportControls();
+            new Thread(new Runnable(){
+                public void run() {
+                    // TODO Auto-generated method stub
+                    while(true)
+                    {
+                        try {
+                            Thread.sleep(5000);
+                            //fetchSongData song = new fetchSongData();
+                            //song.execute();
+
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                }
+            }).start();
         }
 
         @Override
@@ -152,25 +165,7 @@ public class LivePlayer extends MainActivity {
     public void onStart() {
         super.onStart();
         mMediaBrowser.connect();
-        new Thread(new Runnable(){
-            public void run() {
-                // TODO Auto-generated method stub
-                while(true)
-                {
-                    try {
-                        Thread.sleep(5000);
-                        fetchSongData song = new fetchSongData();
-                        song.execute();
 
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-
-                }
-
-            }
-        }).start();
     }
 
     @Override
