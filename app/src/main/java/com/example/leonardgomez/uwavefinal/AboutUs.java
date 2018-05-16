@@ -14,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.view.Window;
 
 
 public class AboutUs extends MainActivity {
@@ -21,7 +24,16 @@ public class AboutUs extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+
+        setContentView(R.layout.activity_about_uwave);
+
+        WebView mixCloud = (WebView) findViewById(R.id.webview);
+        WebSettings webSettings = mixCloud.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        mixCloud.loadUrl("file:///android_asset/firebase1/about.html");
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

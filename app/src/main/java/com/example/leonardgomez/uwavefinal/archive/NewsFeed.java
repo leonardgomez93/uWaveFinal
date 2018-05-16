@@ -12,9 +12,9 @@ import com.example.leonardgomez.uwavefinal.MainActivity;
 import com.example.leonardgomez.uwavefinal.R;
 
 
-//Announcements class using Twitter API
+//NewsFeed class using Twitter API
 
-public class Announcements extends MainActivity {
+public class NewsFeed extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +24,7 @@ public class Announcements extends MainActivity {
 
         WebSettings webSettings = psa.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        //psa.loadUrl("file:///android_asset/uwave_archive2.html");
-        psa.loadUrl("file:///android_asset/uwave_tweets.html");
+        psa.loadUrl("file:///android_asset/firebase1/newsfeed.html");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

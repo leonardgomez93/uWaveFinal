@@ -11,7 +11,8 @@
               android:paddingTop="@dimen/activity_vertical_margin"
               tools:context="com.example.leonardgomez.uwavefinal.uwavechat.Login"
               android:orientation="vertical"
-              android:gravity="center">
+              android:gravity="center"
+              android:background="@color/cardview_light_background">
 
 
     <TextView
@@ -22,7 +23,7 @@
             android:text="UWave Chat Login"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColorLink="@android:color/background_dark"
-            android:textSize="30dp"/>
+            android:textSize="30sp"/>
 
     <EditText
             android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             android:inputType="text"
             android:maxLines="1"
             android:hint="enter username"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10sp"/>
 
     <EditText
             android:layout_width="match_parent"
@@ -40,7 +41,7 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:hint="enter password"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10sp"/>
 
     <Button
             android:id="@+id/loginButton"
@@ -55,6 +56,5 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="New to UWave? Join now"/>
-
 
 </LinearLayout>

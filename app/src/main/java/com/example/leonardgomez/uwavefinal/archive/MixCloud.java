@@ -30,7 +30,7 @@ public class MixCloud extends MainActivity{
         WebSettings webSettings = mixCloud.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        mixCloud.loadUrl("file:///android_asset/firebase1/index.html");
+        mixCloud.loadUrl("file:///android_asset/firebase1/archive.html");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

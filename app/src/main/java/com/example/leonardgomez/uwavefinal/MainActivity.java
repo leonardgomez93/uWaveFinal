@@ -60,12 +60,15 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             Intent activity_home = new Intent(this, MainActivity.class);
             startActivity(activity_home);
-        } else if (id == R.id.nav_announcements) {
-            Intent activity_announcements = new Intent(this, Announcements.class);
+        } else if(id == R.id.nav_live_player) {
+            startActivity(new Intent(MainActivity.this, LivePlayer.class));
+        } else if (id == R.id.nav_newsfeed) {
+            Intent activity_announcements = new Intent(this, NewsFeed.class);
             startActivity(activity_announcements);
         } else if (id == R.id.nav_chat) {
-            Intent activity_login_ = new Intent(this, Login.class);
-            startActivity(activity_login_);
+            Intent activity_login= new Intent(this, Login.class);
+            activity_login.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(activity_login);
         } else if (id == R.id.nav_schedule) {
             Intent activity_schedule = new Intent(this, Schedule.class);
             startActivity(activity_schedule);

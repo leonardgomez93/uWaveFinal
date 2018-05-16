@@ -49,13 +49,11 @@ public class Login extends AppCompatActivity {
     Button loginButton, registerButton;
     String user;
     String pass;
-    TextView guestUser;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        
         registerButton = (Button) findViewById(R.id.registerButton);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
@@ -69,6 +67,8 @@ public class Login extends AppCompatActivity {
         });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
+            
+
             @Override
             public void onClick(View v) {
                 user = username.getText().toString();
@@ -86,6 +86,7 @@ public class Login extends AppCompatActivity {
                     pd.show();
 
                     StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
                         @Override
                         public void onResponse(String s) {
 
@@ -134,9 +135,11 @@ public class Login extends AppCompatActivity {
 
                     RequestQueue rQueue = Volley.newRequestQueue(Login.this);
                     rQueue.add(request);
+
                 }
 
             }
         });
+
     }
 }

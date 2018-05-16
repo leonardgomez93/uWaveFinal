@@ -117,13 +117,14 @@
         </service>
 
         <activity
-            android:name=".uwavechat.Login"
-            android:label="UWave Chat Login">
+                android:name=".uwavechat.Login"
+                android:label="UWave Login"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:parentActivityName=".uwavechat.MainActivity">
             <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
         </activity>
-
         <activity
             android:name=".uwavechat.Register"
             android:label="UWave Chat Registration">
@@ -133,26 +134,16 @@
         </activity>
 
         <activity
-            android:name=".uwavechat.Users"
-            android:label="Available Users">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
+            android:name=".uwavechat.Users">
         </activity>
 
         <activity
-            android:name=".uwavechat.Chat"
-            android:label="UWave Chat">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
+            android:name=".uwavechat.Chat">
         </activity>
-
-        <activity android:name=".uwavechat.MessageAdapter" />
 
         <activity
             android:name=".archive.MixCloud"
-            android:label="Archive"
+            android:label="@string/title_activity_archive"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -160,8 +151,8 @@
         </activity>
 
         <activity
-            android:name=".archive.Announcements"
-            android:label="Forum"
+            android:name=".archive.NewsFeed"
+            android:label="@string/title_activity_newsfeed"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

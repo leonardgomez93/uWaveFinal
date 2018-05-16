@@ -15,10 +15,12 @@
         android:layout_height="wrap_content"
         android:text="No users found!"
         android:id="@+id/noUsersText"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/usersList"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/usersList" android:headerDividersEnabled="false"
+            style="@style/Widget.AppCompat.Light.ListView.DropDown" android:scrollbars="vertical"
+            android:keepScreenOn="true"/>
 </LinearLayout>

@@ -8,22 +8,27 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
             android:title="UWave Radio" />
+
         <item
-            android:id="@+id/nav_announcements"
-            android:icon="@drawable/ic_people_black_24dp"
-            android:title="Announcements"/>
+                android:id="@+id/nav_live_player"
+                android:icon="@drawable/ic_stat_image_audiotrack"
+                android:title="Now Playing" />
         <item
-            android:id="@+id/nav_chat"
-            android:icon="@drawable/ic_schedule_black_24dp"
-            android:title="Chat" />
+            android:id="@+id/nav_newsfeed"
+            android:icon="@drawable/ic_menu_share"
+            android:title="News Feed"/>
+        <item
+            android:id="@+id/nav_archive"
+            android:icon="@drawable/skip_back_button"
+            android:title="Archive" />
         <item
             android:id="@+id/nav_schedule"
-            android:icon="@drawable/ic_people_black_24dp"
+            android:icon="@drawable/ic_schedule_black_24dp"
             android:title="Schedule" />
 
-        <item android:id="@+id/nav_archive"
+        <item android:id="@+id/nav_chat"
               android:icon="@drawable/ic_people_black_24dp"
-              android:title="Archive" />
+              android:title="Chat" />
         <item
             android:id="@+id/nav_psa_form"
             android:icon="@drawable/ic_menu_send"
@@ -36,7 +41,7 @@
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_black_24dp"
-            android:title="About us" />
+            android:title="About UWave" />
     </group>
 
 </menu>
