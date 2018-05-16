@@ -45,8 +45,7 @@ public class LivePlayer extends MainActivity {
     private ImageButton playPause;
     private String temp = "";
     final Handler handler = new Handler();
-    public TextView songName;
-    public TextView artistAndAlbumName;
+
     private MediaBrowserCompat mMediaBrowser;
 
 
@@ -125,8 +124,7 @@ public class LivePlayer extends MainActivity {
         //Create MediaBrowserServiceCompat
         mMediaBrowser = new MediaBrowserCompat(this, new ComponentName(this, MediaPlaybackService.class), mConnectionCallbacks,
                 null);
-        TextView songName = (TextView) findViewById(R.id.songName);
-        TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
+
         // Construct menu
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -216,8 +214,8 @@ public class LivePlayer extends MainActivity {
     }
 
     class fetchSongData extends AsyncTask<Void, Void, Void> {
-        //public TextView songName = (TextView) findViewById(R.id.songName);
-        //public TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
+        public TextView songName = (TextView) findViewById(R.id.songName);
+        public TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
         public String songTitle = "";
         public String artistAndAlbum = "";
         public String data = "";
