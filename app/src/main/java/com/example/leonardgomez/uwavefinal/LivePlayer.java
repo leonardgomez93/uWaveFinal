@@ -1,27 +1,28 @@
 package com.example.leonardgomez.uwavefinal;
 
 import android.content.ComponentName;
+import android.content.Intent;
 import android.media.AudioManager;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.RemoteException;
-import android.support.design.widget.NavigationView;
+import android.os.*;
+import android.support.annotation.NonNull;
 import android.support.v4.media.MediaBrowserCompat;
-import android.support.v4.media.MediaMetadataCompat;
+import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.session.MediaControllerCompat;
+import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.util.Log;
+import android.view.View;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +30,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+
+import static android.media.MediaMetadata.METADATA_KEY_ALBUM;
+import static android.media.MediaMetadata.METADATA_KEY_ALBUM_ART_URI;
+import static android.media.MediaMetadata.METADATA_KEY_ARTIST;
+import static android.media.MediaMetadata.METADATA_KEY_TITLE;
 
 public class LivePlayer extends MainActivity {
 
@@ -37,11 +44,7 @@ public class LivePlayer extends MainActivity {
     private TextView mArtistTextView;
     private ImageButton playPause;
     private String temp = "";
-    private TextView songName = (TextView) findViewById(R.id.songName);
-    private TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
-    public String song = "";
-    public String artistAndAlbum = "";
-    public String data = "";
+    final Handler handler = new Handler();
 
     private MediaBrowserCompat mMediaBrowser;
 
@@ -73,25 +76,6 @@ public class LivePlayer extends MainActivity {
 
             // Finish building the UI
             buildTransportControls();
-            new Thread(new Runnable(){
-                public void run() {
-                    // TODO Auto-generated method stub
-                    while(true)
-                    {
-                        try {
-                            Thread.sleep(5000);
-                            //fetchSongData song = new fetchSongData();
-                            //song.execute();
-
-                        } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                }
-            }).start();
         }
 
         @Override
@@ -157,15 +141,28 @@ public class LivePlayer extends MainActivity {
         fetchSongData song = new fetchSongData();
         song.execute();
 
+        Runnable runnableCode = new Runnable() {
+            @Override
+            public void run() {
+                // Do something here on the main thread
+                Log.d("Handlers", "Called on main thread");
+                fetchSongData song = new fetchSongData();
+                song.execute();
+                handler.postDelayed(this, 2000);
+            }
+        };
+        handler.post(runnableCode);
 
     }
+
+
 
 
     @Override
     public void onStart() {
         super.onStart();
         mMediaBrowser.connect();
-
+        // Define the code block to be executed
     }
 
     @Override
@@ -217,47 +214,51 @@ public class LivePlayer extends MainActivity {
     }
 
     class fetchSongData extends AsyncTask<Void, Void, Void> {
-
+        public TextView songName = (TextView) findViewById(R.id.songName);
+        public TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
+        public String songTitle = "";
+        public String artistAndAlbum = "";
+        public String data = "";
         @Override
         protected Void doInBackground(Void... voids) {
-            try {
-                URL url = new URL("https://uwave.fm/listen/now-playing.json");
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line = "";
-                while (line != null) {
-                    line = bufferedReader.readLine();
-                    if (line != null) {
-                        data += line;
-                    }
-                }
-
                 try {
-                    JSONObject songData = new JSONObject(data);
-                    song = songData.getString("title");
-                    if (songData.getString("artist").equals("") && songData.getString("album").equals("")) {
-                        artistAndAlbumName.setVisibility(View.INVISIBLE);
-                    } else
-                        artistAndAlbum = songData.getString("artist") + " - " + songData.getString("album");
-                } catch (JSONException e) {
+                    URL url = new URL("https://uwave.fm/listen/now-playing.json");
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line = "";
+                    while (line != null) {
+                        line = bufferedReader.readLine();
+                        if (line != null) {
+                            data += line;
+                        }
+                    }
+
+                    try {
+                        JSONObject songData = new JSONObject(data);
+                        songTitle = songData.getString("title");
+                        if (songData.getString("artist").equals("") && songData.getString("album").equals("")) {
+                            artistAndAlbumName.setVisibility(View.INVISIBLE);
+                        } else
+                            artistAndAlbum = songData.getString("artist") + " - " + songData.getString("album");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } catch (MalformedURLException e) {
                     e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    artistAndAlbum = "**Could not connect to UWave Server at this time**";
+                    //playPause.setVisibility(View.GONE);
+                    //throw new Error("Failed.");
                 }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-                artistAndAlbum = "**Could not connect to UWave Server at this time**";
-                //playPause.setVisibility(View.GONE);
-                //throw new Error("Failed.");
-            }
-            return null;
+                return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            songName.setText(song);
+            songName.setText(songTitle);
             artistAndAlbumName.setText(artistAndAlbum);
         }
     }
