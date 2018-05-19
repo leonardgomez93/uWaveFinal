@@ -17,7 +17,6 @@
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="UWave Chat Registration"
-        android:textColorLink="@android:color/background_dark"
         android:textSize="30dp" />
 
     <EditText
