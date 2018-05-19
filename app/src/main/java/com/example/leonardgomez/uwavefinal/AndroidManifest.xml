@@ -127,14 +127,15 @@
         </activity>
         <activity
             android:name=".uwavechat.Register"
-            android:label="UWave Chat Registration">
+            android:label="Register to Join the Conversation">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.example.leonardgomez.uwavefinal.MainActivity" />
         </activity>
 
         <activity
-            android:name=".uwavechat.Users">
+            android:name=".uwavechat.Users"
+            android:label="Message a DJ">
         </activity>
 
         <activity

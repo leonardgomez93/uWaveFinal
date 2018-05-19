@@ -64,15 +64,15 @@ public class LivePlayer extends MainActivity {
                         new MediaControllerCompat(LivePlayer.this, // Context
                                 token);
 
-                        if(mediaController.getPlaybackState().getState() == (PlaybackStateCompat.STATE_PLAYING)) {
-                                playPause.setImageResource(R.drawable.stop_button);
-                        }
+                if(mediaController.getPlaybackState().getState() == (PlaybackStateCompat.STATE_PLAYING)) {
+                    playPause.setImageResource(R.drawable.stop_button);
+                }
 
-                        // Save the controller
-                        MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
+                // Save the controller
+                MediaControllerCompat.setMediaController(LivePlayer.this, mediaController);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
 
             // Finish building the UI
             buildTransportControls();
@@ -221,38 +221,38 @@ public class LivePlayer extends MainActivity {
         public String data = "";
         @Override
         protected Void doInBackground(Void... voids) {
-                try {
-                    URL url = new URL("https://uwave.fm/listen/now-playing.json");
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    InputStream inputStream = httpURLConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                    String line = "";
-                    while (line != null) {
-                        line = bufferedReader.readLine();
-                        if (line != null) {
-                            data += line;
-                        }
+            try {
+                URL url = new URL("https://uwave.fm/listen/now-playing.json");
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+                while (line != null) {
+                    line = bufferedReader.readLine();
+                    if (line != null) {
+                        data += line;
                     }
-
-                    try {
-                        JSONObject songData = new JSONObject(data);
-                        songTitle = songData.getString("title");
-                        if (songData.getString("artist").equals("") && songData.getString("album").equals("")) {
-                            artistAndAlbumName.setVisibility(View.INVISIBLE);
-                        } else
-                            artistAndAlbum = songData.getString("artist") + " - " + songData.getString("album");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    artistAndAlbum = "**Could not connect to UWave Server at this time**";
-                    //playPause.setVisibility(View.GONE);
-                    //throw new Error("Failed.");
                 }
-                return null;
+
+                try {
+                    JSONObject songData = new JSONObject(data);
+                    songTitle = songData.getString("title");
+                    if (songData.getString("artist").equals("") && songData.getString("album").equals("")) {
+                        artistAndAlbumName.setVisibility(View.INVISIBLE);
+                    } else
+                        artistAndAlbum = songData.getString("artist") + " - " + songData.getString("album");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+                artistAndAlbum = "**Could not connect to UWave Server at this time**";
+                //playPause.setVisibility(View.GONE);
+                //throw new Error("Failed.");
+            }
+            return null;
         }
 
         @Override
@@ -263,4 +263,3 @@ public class LivePlayer extends MainActivity {
         }
     }
 }
-
