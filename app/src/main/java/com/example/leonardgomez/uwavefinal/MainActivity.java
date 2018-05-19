@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.leonardgomez.uwavefinal.archive.Announcements;
+import com.example.leonardgomez.uwavefinal.archive.NewsFeed;
 import com.example.leonardgomez.uwavefinal.archive.MixCloud;
 import com.example.leonardgomez.uwavefinal.schedule.CalendarEvent;
 import com.example.leonardgomez.uwavefinal.schedule.CalendarEvents;
@@ -183,27 +183,30 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+   @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.avs
+        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
             Intent activity_home = new Intent(this, MainActivity.class);
             startActivity(activity_home);
-        } else if (id == R.id.nav_forum) {
-            Intent activity_chat = new Intent(this, Announcements.class);
-            startActivity(activity_chat);
+        } else if(id == R.id.nav_live_player) {
+            startActivity(new Intent(MainActivity.this, LivePlayer.class));
+        } else if (id == R.id.nav_newsfeed) {
+            Intent activity_announcements = new Intent(this, NewsFeed.class);
+            startActivity(activity_announcements);
+        } else if (id == R.id.nav_schedule) {
+            Intent activity_schedule= new Intent(this, Schedule.class);
+            startActivity(activity_schedule);
         } else if (id == R.id.nav_archive) {
             Intent activity_archive = new Intent(this, MixCloud.class);
             startActivity(activity_archive);
         } else if (id == R.id.nav_chat) {
-            Intent activity_archive = new Intent(this, Login.class);
-            startActivity(activity_archive);
-        } else if (id == R.id.nav_schedule) {
-            Intent activity_schedule = new Intent(this, Schedule.class);
-            startActivity(activity_schedule);
+            Intent activity_login = new Intent(this, Login.class);
+            activity_login.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(activity_login);
         } else if (id == R.id.nav_psa_form) {
             Intent activity_psa_form = new Intent(this, PsaApplicationForm.class);
             startActivity(activity_psa_form);
