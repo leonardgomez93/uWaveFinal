@@ -1,7 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".schedule.Schedule">
+    tools:context=".schedule.Schedule"
+      tools:showIn="@layout/activity_schedule">
     <item
         android:id="@+id/action_today"
         android:orderInCategory="100"
