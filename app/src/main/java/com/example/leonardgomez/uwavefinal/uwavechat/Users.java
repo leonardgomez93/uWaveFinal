@@ -100,7 +100,7 @@ public class Users extends AppCompatActivity {
             usersList.setVisibility(View.GONE);
         }
         else{
-            noUsersText.setVisibility(View.VISIBLE);
+            noUsersText.setVisibility(View.GONE);
             usersList.setVisibility(View.VISIBLE);
             usersList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, al));
         }

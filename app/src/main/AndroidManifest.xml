@@ -119,7 +119,6 @@
         <activity
                 android:name=".uwavechat.Login"
                 android:label="UWave Login"
-                android:theme="@style/AppTheme.NoActionBar"
                 android:parentActivityName=".MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"

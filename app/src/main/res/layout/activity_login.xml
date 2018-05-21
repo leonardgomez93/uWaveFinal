@@ -11,9 +11,7 @@
               android:paddingTop="@dimen/activity_vertical_margin"
               tools:context="com.example.leonardgomez.uwavefinal.uwavechat.Login"
               android:orientation="vertical"
-              android:gravity="center"
-              android:background="@color/cardview_light_background">
-
+              android:gravity="center">
 
     <TextView
             android:layout_width="match_parent"
@@ -22,7 +20,6 @@
             android:gravity="center"
             android:text="UWave Chat Login"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColorLink="@android:color/background_dark"
             android:textSize="30sp"/>
 
     <EditText
