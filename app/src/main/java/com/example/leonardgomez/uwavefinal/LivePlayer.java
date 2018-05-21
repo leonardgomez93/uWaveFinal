@@ -1,28 +1,29 @@
 package com.example.leonardgomez.uwavefinal;
 
 import android.content.ComponentName;
-import android.content.Intent;
 import android.media.AudioManager;
-import android.os.*;
-import android.support.annotation.NonNull;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.RemoteException;
+import android.support.design.widget.NavigationView;
 import android.support.v4.media.MediaBrowserCompat;
-import android.support.v4.media.MediaDescriptionCompat;
-import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.MediaMetadataCompat;
+import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
-import android.util.Log;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,12 +31,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-
-import static android.media.MediaMetadata.METADATA_KEY_ALBUM;
-import static android.media.MediaMetadata.METADATA_KEY_ALBUM_ART_URI;
-import static android.media.MediaMetadata.METADATA_KEY_ARTIST;
-import static android.media.MediaMetadata.METADATA_KEY_TITLE;
 
 public class LivePlayer extends MainActivity {
 
@@ -44,8 +39,13 @@ public class LivePlayer extends MainActivity {
     private TextView mArtistTextView;
     private ImageButton playPause;
     private String temp = "";
-    final Handler handler = new Handler();
-
+    private Handler handler;
+    public String songTitle = "";
+    public String artistAndAlbum = "";
+    public String data = "";
+    public String songTitle2 = "";
+    public String artistAndAlbum2 = "";
+    public boolean invisible = false;
     private MediaBrowserCompat mMediaBrowser;
 
 
@@ -76,6 +76,7 @@ public class LivePlayer extends MainActivity {
 
             // Finish building the UI
             buildTransportControls();
+
         }
 
         @Override
@@ -116,6 +117,7 @@ public class LivePlayer extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        handler = new Handler();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_player);
 
@@ -138,23 +140,27 @@ public class LivePlayer extends MainActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        fetchSongData song = new fetchSongData();
-        song.execute();
-
-        Runnable runnableCode = new Runnable() {
+        handler.post(new Runnable() {
+            public TextView songName = (TextView) findViewById(R.id.songName);
+            public TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
             @Override
             public void run() {
-                // Do something here on the main thread
                 Log.d("Handlers", "Called on main thread");
-                fetchSongData song = new fetchSongData();
+                fetchSongData2 song = new fetchSongData2();
                 song.execute();
-                handler.postDelayed(this, 2000);
+                if (invisible) {
+                    artistAndAlbumName.setVisibility(View.INVISIBLE);
+                    songName.setVisibility(View.INVISIBLE);
+                } else {
+                    artistAndAlbumName.setVisibility(View.VISIBLE);
+                    songName.setVisibility(View.VISIBLE);
+                    songName.setText(songTitle);
+                    artistAndAlbumName.setText(artistAndAlbum);
+                }
+                handler.postDelayed(this, 1000);
             }
-        };
-        handler.post(runnableCode);
-
+        });
     }
-
 
 
 
@@ -213,15 +219,16 @@ public class LivePlayer extends MainActivity {
         mediaController.registerCallback(controllerCallback);
     }
 
-    class fetchSongData extends AsyncTask<Void, Void, Void> {
-        public TextView songName = (TextView) findViewById(R.id.songName);
-        public TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
-        public String songTitle = "";
-        public String artistAndAlbum = "";
-        public String data = "";
+    public class fetchSongData2 extends AsyncTask<Void, Void, Void> {
+        //public TextView songName = (TextView) findViewById(R.id.songName);
+        //public TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
+
         @Override
         protected Void doInBackground(Void... voids) {
             try {
+                data = "";
+                //songTitle = "";
+                //artistAndAlbum = "";
                 URL url = new URL("https://uwave.fm/listen/now-playing.json");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
@@ -238,8 +245,10 @@ public class LivePlayer extends MainActivity {
                     JSONObject songData = new JSONObject(data);
                     songTitle = songData.getString("title");
                     if (songData.getString("artist").equals("") && songData.getString("album").equals("")) {
-                        artistAndAlbumName.setVisibility(View.INVISIBLE);
+                        invisible = true;
+                        //artistAndAlbumName.setVisibility(View.INVISIBLE);
                     } else
+                        invisible = false;
                         artistAndAlbum = songData.getString("artist") + " - " + songData.getString("album");
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -258,8 +267,8 @@ public class LivePlayer extends MainActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            songName.setText(songTitle);
-            artistAndAlbumName.setText(artistAndAlbum);
+            //songName.setText(songTitle);
+            //artistAndAlbumName.setText(artistAndAlbum);
         }
     }
 }

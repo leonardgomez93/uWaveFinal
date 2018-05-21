@@ -15,25 +15,25 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="54dp" />
 
-        <com.alamkanak.weekview.WeekView
-            android:id="@+id/weekView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="54dp"
-            app:columnGap="8dp"
-            app:dayBackgroundColor="#05000000"
-            app:eventTextColor="@android:color/white"
-            app:headerColumnBackground="#ffffffff"
-            app:headerColumnPadding="8dp"
-            app:headerColumnTextColor="@color/toolbar_text"
-            app:headerRowBackgroundColor="@color/toolbar"
-            app:headerRowPadding="12dp"
-            app:hourHeight="60dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:noOfVisibleDays="3"
-            app:textSize="12sp"
-            app:todayBackgroundColor="#d8d8d8"
-            app:todayHeaderTextColor="@color/accent" />
+    <com.alamkanak.weekview.WeekView
+        android:id="@+id/weekView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="104dp"
+        app:columnGap="8dp"
+        app:dayBackgroundColor="#05000000"
+        app:eventTextColor="@android:color/white"
+        app:headerColumnBackground="#ffffffff"
+        app:headerColumnPadding="8dp"
+        app:headerColumnTextColor="@color/toolbar_text"
+        app:headerRowBackgroundColor="@color/toolbar"
+        app:headerRowPadding="12dp"
+        app:hourHeight="60dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:noOfVisibleDays="3"
+        app:textSize="12sp"
+        app:todayBackgroundColor="#d8d8d8"
+        app:todayHeaderTextColor="@color/accent" />
 
 
 

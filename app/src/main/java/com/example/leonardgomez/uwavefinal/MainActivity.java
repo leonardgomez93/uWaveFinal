@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         fetchData process = new fetchData();
         process.execute();
+
     }
 
     class fetchData extends AsyncTask<Void, Integer, Void> {
