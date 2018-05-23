@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
             progressBar.setVisibility(View.VISIBLE);
 
         }
-
+//hhhadv
         @Override
         protected Void doInBackground(Void... values) {
             try {
