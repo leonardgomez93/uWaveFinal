@@ -18,10 +18,10 @@
 
     <ProgressBar
         android:id="@+id/progressBar2"
-        android:layout_width="387px"
-        android:layout_height="189px"
+        android:layout_width="250dp"
+        android:layout_height="125dp"
         android:indeterminate="true"
-        android:indeterminateDrawable="@drawable/run_animation2"
+        android:indeterminateDrawable="@drawable/run_animation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -69,4 +69,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/btn_dialog" />
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        android:visibility="gone"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/run_animation2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </ProgressBar>
+
 </android.support.constraint.ConstraintLayout>

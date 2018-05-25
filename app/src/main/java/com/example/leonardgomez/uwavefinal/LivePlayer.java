@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -47,6 +48,7 @@ public class LivePlayer extends MainActivity {
     public String artistAndAlbum2 = "";
     public boolean invisible = false;
     private MediaBrowserCompat mMediaBrowser;
+    public ProgressBar progressBar2;
 
 
     private boolean isPlaying;
@@ -103,14 +105,17 @@ public class LivePlayer extends MainActivity {
 
                     switch (state.getState()) {
                         case PlaybackStateCompat.STATE_PLAYING:
+                            progressBar2.setVisibility(View.GONE);
                             playPause.setVisibility(View.VISIBLE);
                             playPause.setImageResource(R.drawable.stop_button);
                             break;
                         case PlaybackStateCompat.STATE_STOPPED:
+                            progressBar2.setVisibility(View.GONE);
                             playPause.setImageResource(R.drawable.play_button);
                             break;
                         case PlaybackStateCompat.STATE_BUFFERING:
                             playPause.setVisibility(View.INVISIBLE);
+                            progressBar2.setVisibility(View.VISIBLE);
                     }
                 }
             };
@@ -139,7 +144,7 @@ public class LivePlayer extends MainActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar3);
         handler.post(new Runnable() {
             public TextView songName = (TextView) findViewById(R.id.songName);
             public TextView artistAndAlbumName = (TextView) findViewById(R.id.artistAndAlbum);
