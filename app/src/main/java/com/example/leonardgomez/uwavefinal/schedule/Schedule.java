@@ -22,9 +22,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Set;
 
 
 public class Schedule extends MainActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
@@ -73,7 +75,8 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
     }
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-        List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
+        List<WeekViewEvent> events2 = new ArrayList<WeekViewEvent>();
+        Set<WeekViewEvent> set = new HashSet<WeekViewEvent>(events2);
         Random r = new Random();
         Calendar startTime = Calendar.getInstance();
         Calendar endTime = (Calendar) startTime.clone();
@@ -81,7 +84,7 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
         Calendar endTime2 = (Calendar) startTime.clone();
         WeekViewEvent event = new WeekViewEvent(0 + 1, cesForever.getAtIndex(0).getSummary(), startTime, endTime);
         WeekViewEvent event2 = new WeekViewEvent(0 + 1, cesForever.getAtIndex(0).getSummary(), startTime, endTime);
-
+        int a = 1;
         for (int i = 0; i < cesForever.getSize(); i++) {
             startTime = Calendar.getInstance();
             monthStart = Integer.parseInt(cesForever.getAtIndex(i).getMonthStart()) - 1;
@@ -92,7 +95,7 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
             hourEnd = Integer.parseInt(cesForever.getAtIndex(i).getTimeEndHour());
             minuteEnd = Integer.parseInt(cesForever.getAtIndex(i).getTimeEndMin());
             startTime.set(Calendar.DATE, dayStart);
-            if (startTime.get(Calendar.MONTH) == newMonth && startTime.get(Calendar.YEAR) == newYear) {
+            if (startTime.get(Calendar.MONTH) == newMonth -1  && startTime.get(Calendar.YEAR) == newYear) {
                 startTime.set(Calendar.HOUR_OF_DAY, hourStart);
                 startTime.set(Calendar.MINUTE, minuteStart);
                 startTime.set(Calendar.MONTH, monthStart);
@@ -100,8 +103,8 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
                 endTime = (Calendar) startTime.clone();
                 endTime.set(Calendar.HOUR_OF_DAY, hourEnd);
                 endTime.set(Calendar.MINUTE, minuteEnd);
-                summary = cesForever.getAtIndex(i).getSummary();
-                int a = r.nextInt(4);
+                //summary = cesForever.getAtIndex(i).getSummary();
+                a = r.nextInt(4);
                 if (a == 0) {
                     event.setColor(getResources().getColor(R.color.event_color_01));
                 } else if (a == 1) {
@@ -112,6 +115,12 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
                     event.setColor(getResources().getColor(R.color.event_color_04));
                 }
                 event = new WeekViewEvent(i + 2, cesForever.getAtIndex(i).getSummary(), startTime, endTime);
+                set.add(event);
+                if(set.size() == events2.size() + 1) {
+                    events2.add(event);
+                }
+           }
+            summary = cesForever.getAtIndex(i).getSummary();
                 GregorianCalendar gc = new GregorianCalendar();
                 gc.set(Calendar.DAY_OF_MONTH, dayStart);
                 gc.set(Calendar.MONTH, monthStart);
@@ -119,7 +128,8 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
                 int numberofDaysPassed = gc.get(Calendar.DAY_OF_YEAR);
                 int count = 0;
                 int count2 = 0;
-                for (int j = 7; j <= 1400; j = j + 7) {
+
+                for (int j = 7; j <= 2000; j = j + 7) {
                     startTime2 = Calendar.getInstance();
                     int daysInYear = 0;
                     if (gc.isLeapYear(startTime.get(Calendar.YEAR) + count2)) {
@@ -135,7 +145,7 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
                     //numberofDaysPassed = numberofDaysPassed + j - count;
                     startTime2.set(Calendar.DAY_OF_YEAR, numberofDaysPassed + j - count);
                     startTime2.set(Calendar.YEAR, yearStart + count2);
-                    if (startTime2.get(Calendar.MONTH) == newMonth && startTime2.get(Calendar.YEAR) == newYear) {
+                    if (startTime2.get(Calendar.MONTH) == newMonth - 1 && startTime2.get(Calendar.YEAR) == newYear) {
                         startTime2.set(Calendar.HOUR_OF_DAY, hourStart);
                         startTime2.set(Calendar.MINUTE, minuteStart);
                         //startTime2.set(Calendar.MONTH, Integer.parseInt(cesForever.getAtIndex(i).getMonthStart()) - 1);
@@ -154,11 +164,15 @@ public class Schedule extends MainActivity implements WeekView.EventClickListene
                         } else {
                             event2.setColor(getResources().getColor(R.color.event_color_04));
                         }
-                        events.add(event2);
+                        set.add(event2);
+                        if(set.size() == events2.size() + 1) {
+                            events2.add(event2);
+                        }
                     }
                 }
             }
-        }
+        //}
+        List<WeekViewEvent> events = events2;
         return events;
     }
 

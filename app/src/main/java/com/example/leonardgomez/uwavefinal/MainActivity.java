@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity
                                 if(map.containsKey("until")) {
                                     CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"), map.get("until"));
                                     cesUntil.addCalendarEvent(ceTemp);
+                                    cesForever.addCalendarEvent(ceTemp);
                                     ces.addCalendarEvent(ceTemp);
                                 } else {
                                     CalendarEvent ceTemp = new CalendarEvent(map.get("summary"), map.get("description"), map.get("dtstart"), map.get("dtend"));
